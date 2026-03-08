@@ -213,6 +213,15 @@
       transform:translateY(10px);
       opacity:0;
     }
+    .stack-card {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .stack-card .card-cta {
+      margin-top: auto;
+      padding-top: 2rem;
+    }
 
     /* ===== PARALLAX IMG CONTAINER ===== */
     .parallax-wrap { overflow:hidden; border-radius:1.5rem; }
@@ -350,8 +359,8 @@
     <!-- ========== PROBLEM — SCROLL TEXT REVEAL ========== -->
     <section id="problem" class="section-dark relative overflow-hidden">
       <div class="noise"></div>
-      <div id="probPin" class="min-h-screen flex items-center justify-center">
-        <div style="max-width:85vw;padding:0 2rem;position:relative;z-index:10;">
+      <div id="probPin" class="min-h-[72vh] md:min-h-[78vh] flex items-center justify-center">
+        <div style="max-width:min(72rem,88vw);padding:0 2rem;position:relative;z-index:10;">
           <p id="probText" class="text-[clamp(1.8rem,5vw,4.2rem)] font-black leading-[1.2] tracking-tight text-center"></p>
         </div>
       </div>
@@ -367,7 +376,7 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
-          <div class="glass-light p-8 md:p-10 srv-card">
+          <div class="glass-light p-8 md:p-10 srv-card stack-card">
             <div class="w-12 h-12 rounded-2xl bg-[#EBF0FF] flex items-center justify-center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg></div>
             <span class="inline-block bg-[#EBF0FF] text-[#0043CC] text-sm font-semibold px-4 py-1.5 rounded-full mt-5">For Law Firms</span>
             <h3 class="text-2xl font-bold text-[#1D1D1F] mt-5">Matter Intake, Review, and Drafting Systems</h3>
@@ -378,11 +387,11 @@
               <li class="flex items-start gap-3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2.5" stroke-linecap="round" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg><span class="text-[#1D1D1F] text-[15px]">Contract, pleading, and packet preparation support</span></li>
               <li class="flex items-start gap-3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2.5" stroke-linecap="round" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg><span class="text-[#1D1D1F] text-[15px]">Human review checkpoints and confidentiality guardrails</span></li>
             </ul>
-            <a href="#contact" class="inline-flex items-center gap-2 text-[#0052FF] font-semibold mt-8 hover:gap-3 transition-all text-[15px] scroll-link">Discuss Firm Workflows <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+            <a href="#contact" class="card-cta inline-flex items-center gap-2 text-[#0052FF] font-semibold hover:gap-3 transition-all text-[15px] scroll-link">Discuss Firm Workflows <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
           </div>
 
-          <div class="glass-light p-8 md:p-10 relative srv-card">
-            <div class="absolute -top-3 right-6 bg-[#1D1D1F] text-white text-[11px] font-semibold px-4 py-1.5 rounded-full tracking-wider uppercase">For Individuals</div>
+          <div class="glass-light p-8 md:p-10 srv-card stack-card">
+            <div class="inline-flex self-start bg-[#1D1D1F] text-white text-[11px] font-semibold px-4 py-1.5 rounded-full tracking-wider uppercase mb-5">For Individuals</div>
             <div class="w-12 h-12 rounded-2xl bg-[#EBF0FF] flex items-center justify-center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></div>
             <span class="inline-block bg-[#EBF0FF] text-[#0043CC] text-sm font-semibold px-4 py-1.5 rounded-full mt-5">Client-Facing</span>
             <h3 class="text-2xl font-bold text-[#1D1D1F] mt-5">Legal Intake and Evidence Collection for People Who Need Help</h3>
@@ -393,7 +402,7 @@
               <li class="flex items-start gap-3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2.5" stroke-linecap="round" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg><span class="text-[#1D1D1F] text-[15px]">Attorney-ready summaries instead of messy inbox threads</span></li>
               <li class="flex items-start gap-3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2.5" stroke-linecap="round" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg><span class="text-[#1D1D1F] text-[15px]">Clear disclaimers and human handoff to legal professionals</span></li>
             </ul>
-            <a href="#contact" class="inline-flex items-center gap-2 text-[#0052FF] font-semibold mt-8 hover:gap-3 transition-all text-[15px] scroll-link">Discuss Client Intake <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+            <a href="#contact" class="card-cta inline-flex items-center gap-2 text-[#0052FF] font-semibold hover:gap-3 transition-all text-[15px] scroll-link">Discuss Client Intake <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
           </div>
         </div>
       </div>
@@ -432,17 +441,17 @@
     <section class="section-light py-24 md:py-32">
       <div class="max-w-5xl mx-auto px-6">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="glass-light p-10 text-center metric-card">
+          <div class="glass-light p-10 text-center metric-card stack-card">
             <div class="text-5xl md:text-6xl font-bold tg counter-num"><span class="counter" data-target="100">0</span>%</div>
             <div class="text-base font-semibold text-[#1D1D1F] mt-3">Attorney Review Path</div>
             <div class="text-sm text-[#86868B] mt-1 font-light">Designed for oversight before action is taken</div>
           </div>
-          <div class="glass-light p-10 text-center metric-card">
+          <div class="glass-light p-10 text-center metric-card stack-card">
             <div class="text-5xl md:text-6xl font-bold tg counter-num"><span class="counter" data-target="24">0</span>/7</div>
             <div class="text-base font-semibold text-[#1D1D1F] mt-3">Intake Capture</div>
             <div class="text-sm text-[#86868B] mt-1 font-light">So facts and documents do not stay trapped in inboxes</div>
           </div>
-          <div class="glass-light p-10 text-center metric-card">
+          <div class="glass-light p-10 text-center metric-card stack-card">
             <div class="text-5xl md:text-6xl font-bold tg counter-num"><span class="counter" data-target="1">0</span></div>
             <div class="text-base font-semibold text-[#1D1D1F] mt-3">Shared Matter Record</div>
             <div class="text-sm text-[#86868B] mt-1 font-light">One place for facts, files, status, and next actions</div>
@@ -460,12 +469,12 @@
           <h2 class="text-3xl md:text-4xl lg:text-[2.75rem] font-bold text-white tracking-tight ind-reveal">Tailored to <span class="tg">Legal Team Structure</span></h2>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="indGrid">
-          <div class="glass-dark p-8 ind-card"><div class="w-11 h-11 rounded-xl bg-white/5 flex items-center justify-center mb-5"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></div><h3 class="text-lg font-bold text-white">Plaintiff Firms</h3><p class="text-white/35 mt-2 leading-relaxed font-light text-[15px]">Intake, incident facts, medical or supporting records, chronology, and case-prep packets that help staff and attorneys see the file faster.</p></div>
-          <div class="glass-dark p-8 ind-card"><div class="w-11 h-11 rounded-xl bg-white/5 flex items-center justify-center mb-5"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg></div><h3 class="text-lg font-bold text-white">Defense and Litigation Teams</h3><p class="text-white/35 mt-2 leading-relaxed font-light text-[15px]">Faster document triage, fact extraction, issue lists, witness materials, and internal summaries without losing the review chain.</p></div>
-          <div class="glass-dark p-8 ind-card"><div class="w-11 h-11 rounded-xl bg-white/5 flex items-center justify-center mb-5"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div><h3 class="text-lg font-bold text-white">Transactional and Contract Work</h3><p class="text-white/35 mt-2 leading-relaxed font-light text-[15px]">Clause review, contract playbooks, draft comparison, checklist generation, and deal-room organization that accelerates attorney review.</p></div>
-          <div class="glass-dark p-8 ind-card"><div class="w-11 h-11 rounded-xl bg-white/5 flex items-center justify-center mb-5"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></div><h3 class="text-lg font-bold text-white">Solo and Small Firms</h3><p class="text-white/35 mt-2 leading-relaxed font-light text-[15px]">A tighter front office: cleaner intake, faster summaries, better follow-up, and less manual chasing across email, notes, and uploads.</p></div>
-          <div class="glass-dark p-8 ind-card"><div class="w-11 h-11 rounded-xl bg-white/5 flex items-center justify-center mb-5"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></div><h3 class="text-lg font-bold text-white">Legal Ops and Intake Teams</h3><p class="text-white/35 mt-2 leading-relaxed font-light text-[15px]">Standardized forms, better evidence collection, client communication templates, and handoffs that arrive with the file already organized.</p></div>
-          <div class="glass-dark p-8 ind-card"><div class="w-11 h-11 rounded-xl bg-white/5 flex items-center justify-center mb-5"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/></svg></div><h3 class="text-lg font-bold text-white">Individuals Navigating Legal Matters</h3><p class="text-white/35 mt-2 leading-relaxed font-light text-[15px]">Guided intake helps people assemble dates, documents, communications, and incident details in a form counsel can review more efficiently.</p></div>
+          <div class="glass-dark p-8 ind-card stack-card"><div class="w-11 h-11 rounded-xl bg-white/5 flex items-center justify-center mb-5"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></div><h3 class="text-lg font-bold text-white">Plaintiff Firms</h3><p class="text-white/35 mt-2 leading-relaxed font-light text-[15px]">Intake, incident facts, medical or supporting records, chronology, and case-prep packets that help staff and attorneys see the file faster.</p></div>
+          <div class="glass-dark p-8 ind-card stack-card"><div class="w-11 h-11 rounded-xl bg-white/5 flex items-center justify-center mb-5"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg></div><h3 class="text-lg font-bold text-white">Defense and Litigation Teams</h3><p class="text-white/35 mt-2 leading-relaxed font-light text-[15px]">Faster document triage, fact extraction, issue lists, witness materials, and internal summaries without losing the review chain.</p></div>
+          <div class="glass-dark p-8 ind-card stack-card"><div class="w-11 h-11 rounded-xl bg-white/5 flex items-center justify-center mb-5"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div><h3 class="text-lg font-bold text-white">Transactional and Contract Work</h3><p class="text-white/35 mt-2 leading-relaxed font-light text-[15px]">Clause review, contract playbooks, draft comparison, checklist generation, and deal-room organization that accelerates attorney review.</p></div>
+          <div class="glass-dark p-8 ind-card stack-card"><div class="w-11 h-11 rounded-xl bg-white/5 flex items-center justify-center mb-5"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></div><h3 class="text-lg font-bold text-white">Solo and Small Firms</h3><p class="text-white/35 mt-2 leading-relaxed font-light text-[15px]">A tighter front office: cleaner intake, faster summaries, better follow-up, and less manual chasing across email, notes, and uploads.</p></div>
+          <div class="glass-dark p-8 ind-card stack-card"><div class="w-11 h-11 rounded-xl bg-white/5 flex items-center justify-center mb-5"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></div><h3 class="text-lg font-bold text-white">Legal Ops and Intake Teams</h3><p class="text-white/35 mt-2 leading-relaxed font-light text-[15px]">Standardized forms, better evidence collection, client communication templates, and handoffs that arrive with the file already organized.</p></div>
+          <div class="glass-dark p-8 ind-card stack-card"><div class="w-11 h-11 rounded-xl bg-white/5 flex items-center justify-center mb-5"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/></svg></div><h3 class="text-lg font-bold text-white">Individuals Navigating Legal Matters</h3><p class="text-white/35 mt-2 leading-relaxed font-light text-[15px]">Guided intake helps people assemble dates, documents, communications, and incident details in a form counsel can review more efficiently.</p></div>
         </div>
       </div>
     </section>
@@ -910,9 +919,9 @@
       ScrollTrigger.create({
         trigger:'#probPin',
         start:'top top',
-        end:'+=260%',
+        end:'+=145%',
         pin:true,
-        scrub:0.45,
+        scrub:0.35,
         onEnter:()=>{
           if(autoRevealPlayed) return;
           autoRevealPlayed = true;
@@ -928,7 +937,7 @@
         },
         onUpdate:self=>{
           const p=self.progress;
-          const revealP=Math.min(p/0.78,1);
+          const revealP=Math.min(p/0.92,1);
           renderProblemWords(revealP);
         }
       });
