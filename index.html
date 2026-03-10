@@ -389,289 +389,125 @@
         padding: 2.2rem;
       }
     }
-    .process-shell {
-      display: grid;
-      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-      gap: 2rem;
-      align-items: start;
+    .process-strip {
+      position:relative;
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:1.1rem;
+      margin-top:0.5rem;
     }
-    .process-stage {
-      position: sticky;
-      top: 6rem;
-      min-height: 34rem;
-      border-radius: 1.9rem;
-      overflow: hidden;
-      padding: 2rem;
-      background:
-        radial-gradient(circle at top left, rgba(77,138,255,0.2), rgba(77,138,255,0) 28%),
-        linear-gradient(160deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
-        rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 20px 80px rgba(0,0,0,0.28);
-    }
-    .process-stage::before {
+    .process-strip::before {
       content:'';
       position:absolute;
-      inset:1px;
-      border-radius:inherit;
-      background:
-        linear-gradient(135deg, rgba(255,255,255,0.08), transparent 20%, transparent 80%, rgba(77,138,255,0.12)),
-        radial-gradient(circle at var(--px,50%) var(--py,50%), rgba(77,138,255,0.18), rgba(77,138,255,0) 32%);
-      opacity:0.95;
+      left:8%;
+      right:8%;
+      top:2.35rem;
+      height:1px;
+      background:linear-gradient(90deg, rgba(77,138,255,0.05), rgba(77,138,255,0.45), rgba(77,138,255,0.05));
       pointer-events:none;
     }
-    .process-stage-head,
-    .process-stage-screen,
-    .process-stage-foot {
-      position: relative;
-      z-index: 2;
-    }
-    .process-stage-head {
+    .process-mini {
+      position:relative;
+      padding:1.35rem 1.35rem 1.5rem;
+      border-radius:1.4rem;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03)),
+        rgba(255,255,255,0.02);
+      border:1px solid rgba(255,255,255,0.07);
+      min-height:17.25rem;
       display:flex;
-      align-items:flex-start;
+      flex-direction:column;
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), border-color 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+    }
+    .process-mini::before {
+      content:'';
+      position:absolute;
+      top:2.1rem;
+      left:50%;
+      width:0.7rem;
+      height:0.7rem;
+      margin-left:-0.35rem;
+      border-radius:999px;
+      background:linear-gradient(135deg,#0052FF,#7DA6FF);
+      box-shadow:0 0 0 8px rgba(0,82,255,0.08), 0 0 22px rgba(0,82,255,0.28);
+    }
+    .process-mini:hover,
+    .process-mini.is-active {
+      transform:translateY(-6px);
+      border-color:rgba(77,138,255,0.26);
+      box-shadow:0 20px 46px rgba(0,0,0,0.2);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.1), rgba(255,255,255,0.04)),
+        rgba(255,255,255,0.03);
+    }
+    .process-mini-top {
+      display:flex;
+      align-items:center;
       justify-content:space-between;
       gap:1rem;
+      padding-top:1.8rem;
     }
-    .process-chip {
-      display:inline-flex;
-      align-items:center;
-      gap:0.5rem;
-      padding:0.45rem 0.8rem;
-      border-radius:999px;
-      background:rgba(255,255,255,0.06);
-      border:1px solid rgba(255,255,255,0.08);
+    .process-mini-index {
+      font-size:0.82rem;
+      font-weight:700;
+      letter-spacing:0.16em;
+      text-transform:uppercase;
+      color:#7da6ff;
+    }
+    .process-mini-tag {
+      font-size:0.72rem;
+      font-weight:600;
+      letter-spacing:0.14em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,0.42);
+    }
+    .process-mini-title {
+      margin-top:1rem;
+      font-size:1.55rem;
+      line-height:1.08;
+      font-weight:800;
+      color:white;
+      max-width:12ch;
+    }
+    .process-mini-copy {
+      margin-top:0.9rem;
+      color:rgba(255,255,255,0.42);
+      line-height:1.68;
+      font-size:0.96rem;
+      font-weight:300;
+    }
+    .process-mini-list {
+      display:grid;
+      gap:0.55rem;
+      margin-top:1.15rem;
+    }
+    .process-mini-item {
+      display:flex;
+      gap:0.7rem;
+      align-items:flex-start;
       color:rgba(255,255,255,0.68);
+      font-size:0.86rem;
+      line-height:1.55;
+    }
+    .process-mini-item span:first-child {
+      width:0.42rem;
+      height:0.42rem;
+      margin-top:0.46rem;
+      border-radius:999px;
+      background:linear-gradient(135deg,#0052FF,#7DA6FF);
+      flex-shrink:0;
+    }
+    .process-mini-foot {
+      margin-top:auto;
+      padding-top:1.15rem;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      color:rgba(255,255,255,0.38);
       font-size:0.76rem;
       font-weight:600;
       letter-spacing:0.12em;
       text-transform:uppercase;
-    }
-    .process-screen {
-      margin-top: 2.1rem;
-      padding: 1.15rem;
-      border-radius: 1.5rem;
-      background: rgba(5,10,20,0.8);
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
-    }
-    .process-screen-top {
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:1rem;
-      margin-bottom:1rem;
-    }
-    .process-dots {
-      display:flex;
-      gap:0.38rem;
-    }
-    .process-dots span {
-      width:0.48rem;
-      height:0.48rem;
-      border-radius:999px;
-      background:rgba(255,255,255,0.16);
-    }
-    .process-progress {
-      display:flex;
-      align-items:center;
-      gap:0.65rem;
-      color:rgba(255,255,255,0.45);
-      font-size:0.72rem;
-      font-weight:600;
-      letter-spacing:0.12em;
-      text-transform:uppercase;
-    }
-    .process-progress-bar {
-      width:5.5rem;
-      height:0.34rem;
-      border-radius:999px;
-      overflow:hidden;
-      background:rgba(255,255,255,0.08);
-    }
-    .process-progress-fill {
-      width:33.333%;
-      height:100%;
-      border-radius:inherit;
-      background:linear-gradient(90deg,#0052FF,#7DA6FF);
-      transition:width 0.45s cubic-bezier(0.4,0,0.2,1);
-    }
-    .process-stage-grid {
-      display:grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap:1rem;
-    }
-    .process-main-panel,
-    .process-side-panel {
-      border-radius: 1.15rem;
-      background: rgba(255,255,255,0.03);
-      border:1px solid rgba(255,255,255,0.06);
-      min-height: 16.5rem;
-      padding:1rem;
-    }
-    .process-main-panel {
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-    }
-    .process-kicker {
-      color:#7da6ff;
-      font-size:0.72rem;
-      letter-spacing:0.18em;
-      text-transform:uppercase;
-      font-weight:600;
-    }
-    .process-main-title {
-      margin-top:0.85rem;
-      font-size:clamp(1.45rem,2.4vw,2.2rem);
-      line-height:1.08;
-      font-weight:800;
-      max-width:14ch;
-    }
-    .process-main-copy {
-      margin-top:0.9rem;
-      color:rgba(255,255,255,0.42);
-      line-height:1.7;
-      font-size:0.98rem;
-      font-weight:300;
-      max-width:34ch;
-    }
-    .process-flow-list {
-      display:grid;
-      gap:0.65rem;
-      margin-top:1.25rem;
-    }
-    .process-flow-item {
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:1rem;
-      border-radius:0.95rem;
-      background:rgba(255,255,255,0.03);
-      border:1px solid rgba(255,255,255,0.05);
-      padding:0.7rem 0.85rem;
-      color:rgba(255,255,255,0.68);
-      font-size:0.88rem;
-    }
-    .process-flow-item strong {
-      color:white;
-      font-weight:600;
-    }
-    .process-side-panel {
-      display:flex;
-      flex-direction:column;
-      gap:0.9rem;
-      justify-content:space-between;
-    }
-    .process-stage-stat {
-      border-radius:1rem;
-      background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-      border:1px solid rgba(255,255,255,0.07);
-      padding:0.9rem;
-    }
-    .process-stage-stat .value {
-      font-size:2rem;
-      line-height:1;
-      font-weight:800;
-      color:white;
-    }
-    .process-stage-stat .label {
-      margin-top:0.45rem;
-      color:rgba(255,255,255,0.42);
-      font-size:0.78rem;
-      letter-spacing:0.1em;
-      text-transform:uppercase;
-      font-weight:600;
-    }
-    .process-stage-foot {
-      margin-top:1.4rem;
-      display:flex;
-      gap:0.7rem;
-      align-items:center;
-      color:rgba(255,255,255,0.4);
-      font-size:0.88rem;
-    }
-    .process-stage-foot .bar {
-      flex:1;
-      height:1px;
-      background:linear-gradient(90deg, rgba(77,138,255,0.5), rgba(255,255,255,0.04));
-    }
-    .process-rail {
-      display:grid;
-      gap:1rem;
-    }
-    .process-card {
-      position:relative;
-      padding:1.25rem 1.25rem 1.35rem 4.5rem;
-      border-radius:1.45rem;
-      background:rgba(255,255,255,0.03);
-      border:1px solid rgba(255,255,255,0.06);
-      min-height:16rem;
-      transition: transform 0.45s cubic-bezier(0.4,0,0.2,1), border-color 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
-    }
-    .process-card.is-active {
-      transform:translateX(10px);
-      border-color:rgba(77,138,255,0.28);
-      background:rgba(255,255,255,0.06);
-      box-shadow:0 18px 44px rgba(0,0,0,0.18);
-    }
-    .process-card-index {
-      position:absolute;
-      left:1.25rem;
-      top:1.25rem;
-      width:2.35rem;
-      height:2.35rem;
-      border-radius:999px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:rgba(255,255,255,0.05);
-      border:1px solid rgba(255,255,255,0.08);
-      color:#7da6ff;
-      font-size:0.86rem;
-      font-weight:700;
-      letter-spacing:0.06em;
-    }
-    .process-card-meta {
-      color:rgba(255,255,255,0.52);
-      font-size:0.72rem;
-      letter-spacing:0.14em;
-      text-transform:uppercase;
-      font-weight:600;
-    }
-    .process-card-title {
-      margin-top:0.8rem;
-      font-size:1.45rem;
-      line-height:1.15;
-      font-weight:800;
-      color:white;
-    }
-    .process-card-copy {
-      margin-top:0.9rem;
-      color:rgba(255,255,255,0.4);
-      line-height:1.72;
-      font-size:0.98rem;
-      font-weight:300;
-    }
-    .process-card-points {
-      display:grid;
-      gap:0.6rem;
-      margin-top:1.25rem;
-    }
-    .process-card-point {
-      display:flex;
-      gap:0.75rem;
-      align-items:flex-start;
-      color:rgba(255,255,255,0.68);
-      font-size:0.88rem;
-    }
-    .process-card-point span:first-child {
-      width:0.48rem;
-      height:0.48rem;
-      margin-top:0.45rem;
-      border-radius:999px;
-      background:linear-gradient(135deg,#0052FF,#7DA6FF);
-      flex-shrink:0;
-      box-shadow:0 0 12px rgba(0,82,255,0.35);
     }
     .feature-grid {
       align-items: stretch;
@@ -857,19 +693,18 @@
       color: #7da6ff;
     }
     @media (max-width: 1023px) {
-      .process-shell {
+      .process-strip {
         grid-template-columns: 1fr;
       }
-      .process-stage {
-        position:relative;
-        top:auto;
+      .process-strip::before {
+        display:none;
+      }
+      .process-mini {
         min-height:auto;
       }
-      .process-stage-grid {
-        grid-template-columns:1fr;
-      }
-      .process-card {
-        min-height:auto;
+      .process-mini::before {
+        left:1.35rem;
+        margin-left:0;
       }
     }
 
@@ -1074,97 +909,48 @@
           <h2 class="text-3xl md:text-4xl lg:text-[2.75rem] font-bold text-white tracking-tight proc-reveal">How Stalefish Turns <span class="tg">Messy Legal Work Into a System</span></h2>
         </div>
 
-        <div class="process-shell">
-          <div class="process-stage cta-reveal" id="processStage">
-            <div class="process-stage-head">
-              <div>
-                <span class="process-chip"><span class="glow-dot"></span><span id="processStageChip">Audit</span></span>
-                <h3 id="processStageHeading" class="text-2xl md:text-[2.35rem] font-bold text-white tracking-tight mt-5 max-w-[14ch]">See where the file breaks.</h3>
-              </div>
-              <div class="process-progress">
-                <span id="processStageStep">Step 1</span>
-                <div class="process-progress-bar"><div class="process-progress-fill" id="processProgressFill"></div></div>
-              </div>
+        <div class="process-strip">
+          <article class="process-mini proc-step-card is-active">
+            <div class="process-mini-top">
+              <span class="process-mini-index">01</span>
+              <span class="process-mini-tag">Audit</span>
             </div>
-
-            <div class="process-screen process-stage-screen">
-              <div class="process-screen-top">
-                <div class="process-dots"><span></span><span></span><span></span></div>
-                <div class="process-progress"><span id="processStagePill">Intake audit</span></div>
-              </div>
-              <div class="process-stage-grid">
-                <div class="process-main-panel">
-                  <div>
-                    <p class="process-kicker" id="processStageKicker">Stage 01</p>
-                    <div class="process-main-title" id="processStageTitle">Expose the real bottlenecks before you automate anything.</div>
-                    <p class="process-main-copy" id="processStageCopy">We map how the matter enters, where facts disappear, and where attorneys are wasting time rebuilding the record from scratch.</p>
-                  </div>
-                  <div class="process-flow-list" id="processFlowList">
-                    <div class="process-flow-item"><strong>Inputs</strong><span>Email threads, PDFs, call notes</span></div>
-                    <div class="process-flow-item"><strong>Failure point</strong><span>Facts split across people and systems</span></div>
-                    <div class="process-flow-item"><strong>Goal</strong><span>One reviewable matter record</span></div>
-                  </div>
-                </div>
-                <div class="process-side-panel">
-                  <div class="process-stage-stat">
-                    <div class="value" id="processStatValue">01</div>
-                    <div class="label" id="processStatLabel">Current stage</div>
-                  </div>
-                  <div class="process-stage-stat">
-                    <div class="value" id="processStatValue2">Reviewable</div>
-                    <div class="label" id="processStatLabel2">Target state</div>
-                  </div>
-                  <div class="process-stage-stat">
-                    <div class="value" id="processStatValue3">Human-led</div>
-                    <div class="label" id="processStatLabel3">Oversight model</div>
-                  </div>
-                </div>
-              </div>
+            <h3 class="process-mini-title">Map the friction in the file.</h3>
+            <p class="process-mini-copy">We look at the real workflow first: where intake enters, where facts split apart, and where attorney time gets burned rebuilding the record.</p>
+            <div class="process-mini-list">
+              <div class="process-mini-item"><span></span><span>Find where the review chain breaks.</span></div>
+              <div class="process-mini-item"><span></span><span>Identify duplicate prep and status chasing.</span></div>
             </div>
+            <div class="process-mini-foot"><span>Current-state audit</span><span>Review first</span></div>
+          </article>
 
-            <div class="process-stage-foot">
-              <span id="processStageFoot">Audit the workflow before you add more tools.</span>
-              <div class="bar"></div>
+          <article class="process-mini proc-step-card">
+            <div class="process-mini-top">
+              <span class="process-mini-index">02</span>
+              <span class="process-mini-tag">Design</span>
             </div>
-          </div>
+            <h3 class="process-mini-title">Rebuild the flow around counsel.</h3>
+            <p class="process-mini-copy">We define what AI organizes, what staff validates, and what remains attorney-reviewed so the system stays fast without becoming sloppy.</p>
+            <div class="process-mini-list">
+              <div class="process-mini-item"><span></span><span>Standardize handoff, chronology, and packet prep.</span></div>
+              <div class="process-mini-item"><span></span><span>Keep source-backed review checkpoints explicit.</span></div>
+            </div>
+            <div class="process-mini-foot"><span>Workflow design</span><span>Human-led</span></div>
+          </article>
 
-          <div class="process-rail">
-            <article class="process-card proc-step-card is-active" data-step="1" data-chip="Audit" data-heading="See where the file breaks." data-pill="Intake audit" data-kicker="Stage 01" data-title="Expose the real bottlenecks before you automate anything." data-copy="We map how the matter enters, where facts disappear, and where attorneys are wasting time rebuilding the record from scratch." data-stat1="01" data-label1="Current stage" data-stat2="Reviewable" data-label2="Target state" data-stat3="Human-led" data-label3="Oversight model" data-foot="Audit the workflow before you add more tools." data-flow='["<strong>Inputs</strong><span>Email threads, PDFs, call notes</span>","<strong>Failure point</strong><span>Facts split across people and systems</span>","<strong>Goal</strong><span>One reviewable matter record</span>"]'>
-              <div class="process-card-index">01</div>
-              <div class="process-card-meta">Workflow audit</div>
-              <h3 class="process-card-title">Map where legal work is slowing down.</h3>
-              <p class="process-card-copy">We start with the actual matter flow, not a generic demo. Intake, chronology prep, contract review, packet assembly, or client updates. The point is to identify where facts are getting lost and where staff is duplicating effort.</p>
-              <div class="process-card-points">
-                <div class="process-card-point"><span></span><span>Track where the file leaves the review chain.</span></div>
-                <div class="process-card-point"><span></span><span>Find the moments where lawyers are doing clerical reconstruction.</span></div>
-                <div class="process-card-point"><span></span><span>Document what already works before changing anything.</span></div>
-              </div>
-            </article>
-
-            <article class="process-card proc-step-card" data-step="2" data-chip="Design" data-heading="Rebuild the workflow around review." data-pill="Review chain" data-kicker="Stage 02" data-title="Define what AI handles and what counsel must still control." data-copy="Stalefish turns loose intake and scattered prep into a tighter operating model with clear handoffs, source-backed summaries, and attorney checkpoints." data-stat1="02" data-label1="Design stage" data-stat2="Source-backed" data-label2="Output standard" data-stat3="Attorney checkpoints" data-label3="Control layer" data-foot="Design the chain before the automation starts." data-flow='["<strong>Automate</strong><span>Structure, triage, chronology, first-pass summaries</span>","<strong>Keep reviewed</strong><span>Judgment, risk calls, final signoff</span>","<strong>Standardize</strong><span>Inputs, handoffs, matter status, packet prep</span>"]'>
-              <div class="process-card-index">02</div>
-              <div class="process-card-meta">System design</div>
-              <h3 class="process-card-title">Build a review chain your team can trust.</h3>
-              <p class="process-card-copy">This is where the workflow stops being a collection of prompts and becomes an operating system for the matter. We define what the machine organizes, what staff validates, and what counsel reviews before anything moves forward.</p>
-              <div class="process-card-points">
-                <div class="process-card-point"><span></span><span>Preserve citations, source docs, and chronology integrity.</span></div>
-                <div class="process-card-point"><span></span><span>Standardize the handoff from intake to attorney-ready output.</span></div>
-                <div class="process-card-point"><span></span><span>Keep confidentiality and approval boundaries explicit.</span></div>
-              </div>
-            </article>
-
-            <article class="process-card proc-step-card" data-step="3" data-chip="Deploy" data-heading="Turn the workflow into an advantage." data-pill="Operational rollout" data-kicker="Stage 03" data-title="Launch a system that gets faster without getting sloppier." data-copy="The output is a cleaner matter record, faster prep, and a legal team that spends more time deciding and less time reorganizing the file." data-stat1="03" data-label1="Launch stage" data-stat2="Faster prep" data-label2="Outcome" data-stat3="Practice edge" data-label3="Competitive shift" data-foot="Ship the workflow, then compound the advantage." data-flow='["<strong>Launch</strong><span>Deploy one high-friction workflow first</span>","<strong>Measure</strong><span>Track speed, consistency, and review quality</span>","<strong>Compound</strong><span>Expand to the next matter type with less drag</span>"]'>
-              <div class="process-card-index">03</div>
-              <div class="process-card-meta">Operational rollout</div>
-              <h3 class="process-card-title">Make the workflow feel faster on every matter.</h3>
-              <p class="process-card-copy">Once the system is live, your team stops hunting through inboxes and attachments just to get back to the facts. Intake is cleaner, summaries are tighter, and the file arrives in a state counsel can actually use.</p>
-              <div class="process-card-points">
-                <div class="process-card-point"><span></span><span>Reduce time lost to duplicate prep and status chasing.</span></div>
-                <div class="process-card-point"><span></span><span>Improve consistency across staff, practices, and matter types.</span></div>
-                <div class="process-card-point"><span></span><span>Create a workflow advantage other firms will have to catch up to.</span></div>
-              </div>
-            </article>
-          </div>
+          <article class="process-mini proc-step-card">
+            <div class="process-mini-top">
+              <span class="process-mini-index">03</span>
+              <span class="process-mini-tag">Deploy</span>
+            </div>
+            <h3 class="process-mini-title">Make the advantage compound.</h3>
+            <p class="process-mini-copy">Launch one high-friction workflow first, tighten it, and expand from there so the team gets faster on every matter that follows.</p>
+            <div class="process-mini-list">
+              <div class="process-mini-item"><span></span><span>Reduce prep drag and matter inconsistency.</span></div>
+              <div class="process-mini-item"><span></span><span>Turn cleaner files into faster legal work.</span></div>
+            </div>
+            <div class="process-mini-foot"><span>Operational rollout</span><span>Practice edge</span></div>
+          </article>
         </div>
       </div>
     </section>
@@ -1899,81 +1685,23 @@
     gsap.utils.toArray('.srv-reveal').forEach(el=>{gsap.from(el,{y:30,opacity:0,duration:0.8,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 85%',once:true}});});
     gsap.utils.toArray('.srv-card').forEach((el,i)=>{gsap.from(el,{y:50,opacity:0,duration:0.9,delay:i*0.15,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 85%',once:true}});});
 
-    // ===== PROCESS — STORYBOARD =====
+    // ===== PROCESS — COMPACT SEQUENCE =====
     gsap.utils.toArray('.proc-reveal').forEach(el=>{gsap.from(el,{y:30,opacity:0,duration:0.8,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 85%',once:true}});});
     const processCards=[...document.querySelectorAll('.proc-step-card')];
-    const processStageRefs={
-      chip:document.getElementById('processStageChip'),
-      heading:document.getElementById('processStageHeading'),
-      pill:document.getElementById('processStagePill'),
-      kicker:document.getElementById('processStageKicker'),
-      title:document.getElementById('processStageTitle'),
-      copy:document.getElementById('processStageCopy'),
-      foot:document.getElementById('processStageFoot'),
-      step:document.getElementById('processStageStep'),
-      progress:document.getElementById('processProgressFill'),
-      stat1:document.getElementById('processStatValue'),
-      label1:document.getElementById('processStatLabel'),
-      stat2:document.getElementById('processStatValue2'),
-      label2:document.getElementById('processStatLabel2'),
-      stat3:document.getElementById('processStatValue3'),
-      label3:document.getElementById('processStatLabel3'),
-      flow:document.getElementById('processFlowList'),
-      stage:document.getElementById('processStage')
-    };
-    const setProcessStage=(card)=>{
-      if(!card) return;
-      processCards.forEach(c=>c.classList.toggle('is-active',c===card));
-      processStageRefs.chip.textContent=card.dataset.chip;
-      processStageRefs.heading.textContent=card.dataset.heading;
-      processStageRefs.pill.textContent=card.dataset.pill;
-      processStageRefs.kicker.textContent=card.dataset.kicker;
-      processStageRefs.title.textContent=card.dataset.title;
-      processStageRefs.copy.textContent=card.dataset.copy;
-      processStageRefs.foot.textContent=card.dataset.foot;
-      processStageRefs.step.textContent=`Step ${card.dataset.step}`;
-      processStageRefs.progress.style.width=`${Number(card.dataset.step)*33.333}%`;
-      processStageRefs.stat1.textContent=card.dataset.stat1;
-      processStageRefs.label1.textContent=card.dataset.label1;
-      processStageRefs.stat2.textContent=card.dataset.stat2;
-      processStageRefs.label2.textContent=card.dataset.label2;
-      processStageRefs.stat3.textContent=card.dataset.stat3;
-      processStageRefs.label3.textContent=card.dataset.label3;
-      const items=JSON.parse(card.dataset.flow);
-      processStageRefs.flow.innerHTML=items.map(item=>`<div class="process-flow-item">${item}</div>`).join('');
-      gsap.fromTo(
-        ['#processStageHeading','#processStageTitle','#processStageCopy','#processFlowList .process-flow-item','#processStageFoot'],
-        {y:18,opacity:0},
-        {y:0,opacity:1,duration:0.55,stagger:0.05,ease:'power3.out',overwrite:true}
-      );
-    };
-    setProcessStage(processCards[0]);
-    processCards.forEach((card,i)=>{
-      gsap.from(card,{
-        y:42,
-        opacity:0,
-        duration:0.8,
-        delay:i*0.08,
-        ease:'power3.out',
-        scrollTrigger:{trigger:card,start:'top 88%',once:true}
-      });
+    ScrollTrigger.batch('.proc-step-card',{
+      start:'top 86%',
+      once:true,
+      onEnter:batch=>gsap.from(batch,{y:34,opacity:0,duration:0.7,stagger:0.1,ease:'power3.out'})
+    });
+    processCards.forEach(card=>{
       ScrollTrigger.create({
         trigger:card,
-        start:'top 55%',
-        end:'bottom 55%',
-        onEnter:()=>setProcessStage(card),
-        onEnterBack:()=>setProcessStage(card)
+        start:'top 70%',
+        end:'bottom 40%',
+        onEnter:()=>processCards.forEach(c=>c.classList.toggle('is-active',c===card)),
+        onEnterBack:()=>processCards.forEach(c=>c.classList.toggle('is-active',c===card))
       });
     });
-    if(processStageRefs.stage){
-      processStageRefs.stage.addEventListener('pointermove',e=>{
-        const rect=processStageRefs.stage.getBoundingClientRect();
-        const px=((e.clientX-rect.left)/rect.width)*100;
-        const py=((e.clientY-rect.top)/rect.height)*100;
-        processStageRefs.stage.style.setProperty('--px',`${px}%`);
-        processStageRefs.stage.style.setProperty('--py',`${py}%`);
-      });
-    }
 
     // ===== METRICS =====
     gsap.utils.toArray('.metric-card').forEach((el,i)=>{
