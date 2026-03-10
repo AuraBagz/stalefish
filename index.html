@@ -894,8 +894,8 @@
       if(!container) return;
 
       const scene=new THREE.Scene();
-      const camera=new THREE.PerspectiveCamera(68,container.clientWidth/container.clientHeight,0.1,1000);
-      camera.position.z=4.25;
+      const camera=new THREE.PerspectiveCamera(70,container.clientWidth/container.clientHeight,0.1,1000);
+      camera.position.z=4.65;
 
       const renderer=new THREE.WebGLRenderer({alpha:true,antialias:true});
       renderer.setSize(container.clientWidth,container.clientHeight);
@@ -914,8 +914,8 @@
       heroEl.addEventListener('mouseleave',()=>{mouse.tx=0;mouse.ty=0;});
 
       // === Particle sphere geometry ===
-      const count=1800;
-      const radius=2.65;
+      const count=1550;
+      const radius=2.15;
       const positions=new Float32Array(count*3);
       const basePositions=new Float32Array(count*3);
       const sizes=new Float32Array(count);
@@ -939,7 +939,7 @@
         basePositions[i*3+1]=y;
         basePositions[i*3+2]=z;
 
-        sizes[i]=Math.random()*4+2.2;
+        sizes[i]=Math.random()*3.4+1.9;
         phases[i]=Math.random()*Math.PI*2;
 
         // Coinbase blue color with subtle variation
@@ -993,6 +993,31 @@
 
       const particles=new THREE.Points(geo,mat);
       scene.add(particles);
+
+      // Cursor glow sits on the same plane as the interaction point.
+      const glowCanvas=document.createElement('canvas');
+      glowCanvas.width=160;
+      glowCanvas.height=160;
+      const glowCtx=glowCanvas.getContext('2d');
+      const glowGrad=glowCtx.createRadialGradient(80,80,8,80,80,80);
+      glowGrad.addColorStop(0,'rgba(157,191,255,0.95)');
+      glowGrad.addColorStop(0.24,'rgba(77,138,255,0.55)');
+      glowGrad.addColorStop(0.56,'rgba(77,138,255,0.18)');
+      glowGrad.addColorStop(1,'rgba(77,138,255,0)');
+      glowCtx.fillStyle=glowGrad;
+      glowCtx.fillRect(0,0,160,160);
+      const glowTexture=new THREE.CanvasTexture(glowCanvas);
+      const cursorGlow=new THREE.Sprite(new THREE.SpriteMaterial({
+        map:glowTexture,
+        color:0x9dbfff,
+        transparent:true,
+        opacity:0,
+        depthWrite:false,
+        blending:THREE.AdditiveBlending
+      }));
+      cursorGlow.scale.set(1.35,1.35,1);
+      cursorGlow.position.set(0,0,0.2);
+      scene.add(cursorGlow);
 
       // === Mouse-proximity connection lines ===
       const maxLines=800;
@@ -1076,6 +1101,13 @@
         // Update connection lines near mouse
         let lineIdx=0;
         const hasMouse=mouse.tx!==0||mouse.ty!==0;
+        if(hitPlane && hasMouse){
+          cursorGlow.position.copy(mouseWorld);
+          cursorGlow.position.z+=0.18;
+          cursorGlow.material.opacity+=(0.82-cursorGlow.material.opacity)*0.18;
+        } else {
+          cursorGlow.material.opacity+=(0-cursorGlow.material.opacity)*0.14;
+        }
         if(hasMouse && hitPlane){
           // Find particles near mouse in world space and connect them
           const nearIdx=[];
