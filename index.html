@@ -213,6 +213,63 @@
       transform:translateY(10px);
       opacity:0;
     }
+    .consult-form {
+      display: grid;
+      gap: 1rem;
+    }
+    .consult-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    .form-label {
+      display: block;
+      color: rgba(255,255,255,0.78);
+      font-size: 0.84rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.45rem;
+    }
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      border-radius: 1rem;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.92);
+      padding: 0.95rem 1rem;
+      font-size: 0.96rem;
+      font-weight: 400;
+      outline: none;
+      transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+    }
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: rgba(255,255,255,0.24);
+    }
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-color: rgba(77,138,255,0.55);
+      background: rgba(255,255,255,0.07);
+      box-shadow: 0 0 0 4px rgba(0,82,255,0.12);
+    }
+    .form-textarea {
+      min-height: 9rem;
+      resize: vertical;
+    }
+    .form-meta {
+      color: rgba(255,255,255,0.28);
+      font-size: 0.82rem;
+      line-height: 1.6;
+      font-weight: 300;
+    }
+    @media (max-width: 767px) {
+      .consult-grid {
+        grid-template-columns: 1fr;
+      }
+    }
     .stack-card {
       height: 100%;
       display: flex;
@@ -496,9 +553,9 @@
     <!-- ========== PROBLEM — SCROLL TEXT REVEAL ========== -->
     <section id="problem" class="section-dark relative overflow-hidden">
       <div class="noise"></div>
-      <div id="probPin" class="min-h-[58vh] md:min-h-[64vh] flex items-center justify-center">
-        <div style="max-width:min(56rem,86vw);padding:0 2rem;position:relative;z-index:10;">
-          <p id="probText" class="text-[clamp(1.8rem,5vw,4.2rem)] font-black leading-[1.2] tracking-tight text-center"></p>
+      <div id="probPin" class="min-h-[48vh] md:min-h-[54vh] flex items-center justify-center">
+        <div style="max-width:min(62rem,90vw);padding:3rem 2rem;position:relative;z-index:10;">
+          <p id="probText" class="text-[clamp(1.55rem,4.3vw,3.8rem)] font-black leading-[1.12] tracking-tight text-center"></p>
         </div>
       </div>
     </section>
@@ -688,31 +745,73 @@
       <div class="max-w-6xl mx-auto px-6 relative z-10">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           <div class="cta-reveal">
-            <h2 class="text-3xl md:text-4xl lg:text-[2.75rem] font-bold text-white leading-tight tracking-tight">Book a Legal Workflow Review <span class="tg">Before You Buy More Software</span></h2>
-            <p class="text-xl text-white/35 mt-6 leading-relaxed font-light">We start with one live workflow review: where the matter enters, where the record gets messy, what staff is doing manually, and where attorney time is getting burned on organization instead of judgment.</p>
-            <a href="mailto:hello@stalefish.ai?subject=Book%20a%20Stalefish%20Workflow%20Review" class="btn-glow !px-10 !py-5 !text-lg mt-10">Book a Workflow Review <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-            <p class="text-white/20 text-sm mt-5 font-light">Focused on one real matter flow, not a generic AI pitch.</p>
+            <p class="text-[#0052FF] text-sm font-semibold tracking-[0.22em] uppercase">Free 15-minute consultation</p>
+            <h2 class="text-3xl md:text-4xl lg:text-[2.75rem] font-bold text-white leading-tight tracking-tight mt-4">Book a Workflow Review <span class="tg">Before Your Practice Falls Behind</span></h2>
+            <p class="text-xl text-white/35 mt-6 leading-relaxed font-light">We use one live process as the starting point: intake, chronology, document triage, contract review, client updates, or another workflow that is costing your team time and accuracy.</p>
+            <div class="glass-dark p-6 md:p-7 mt-10">
+              <div class="space-y-5">
+                <div>
+                  <p class="text-white text-sm font-semibold">What you get on the call</p>
+                  <p class="text-white/35 mt-2 text-[15px] font-light leading-relaxed">A fast diagnosis of where your legal workflow is dragging, what should be automated first, and what must stay attorney-reviewed.</p>
+                </div>
+                <div>
+                  <p class="text-white text-sm font-semibold">Best fit</p>
+                  <p class="text-white/35 mt-2 text-[15px] font-light leading-relaxed">Law firms, legal ops teams, and client-facing intake systems that are losing time to scattered facts, slow handoff, and repetitive prep work.</p>
+                </div>
+              </div>
+            </div>
+            <p class="text-white/20 text-sm mt-5 font-light">No generic AI pitch. One focused workflow, one concrete next step.</p>
             <p class="text-white/25 mt-8 font-light">Primary contact: <a href="mailto:hello@stalefish.ai" class="text-[#0052FF] hover:underline">hello@stalefish.ai</a></p>
           </div>
           <div class="cta-reveal">
             <div class="glass-dark p-8 md:p-10" style="border-radius:1.5rem;">
-              <h3 class="text-xl font-bold text-white mb-1">What Happens in the Review</h3>
-              <p class="text-white/35 mb-8 font-light text-[15px]">We use one workflow as the starting point and send back a tighter view of what should be automated, what should stay reviewed, and what should be reorganized first.</p>
-              <div class="space-y-4">
-                <div class="rounded-xl border border-white/8 bg-white/5 px-5 py-4">
-                  <p class="text-white text-sm font-semibold">1. You send the workflow</p>
-                  <p class="text-white/35 mt-1 text-[15px] font-light">Litigation intake, contract review, chronology prep, packet assembly, client updates, or another repeatable legal process.</p>
+              <h3 class="text-xl font-bold text-white mb-1">Book Your Free 15-Minute Consultation</h3>
+              <p class="text-white/35 mb-8 font-light text-[15px]">Tell us which workflow is slowing your team down and we will come to the call prepared.</p>
+              <form class="consult-form" action="https://formsubmit.co/hello@stalefish.ai" method="POST">
+                <input type="hidden" name="_subject" value="Stalefish consultation request">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_next" value="https://stalefish.ai/#contact">
+                <div class="consult-grid">
+                  <div>
+                    <label class="form-label" for="consult-name">Name</label>
+                    <input class="form-input" id="consult-name" name="name" type="text" placeholder="Jane Doe" required>
+                  </div>
+                  <div>
+                    <label class="form-label" for="consult-email">Work Email</label>
+                    <input class="form-input" id="consult-email" name="email" type="email" placeholder="jane@firm.com" required>
+                  </div>
                 </div>
-                <div class="rounded-xl border border-white/8 bg-white/5 px-5 py-4">
-                  <p class="text-white text-sm font-semibold">2. We map the friction</p>
-                  <p class="text-white/35 mt-1 text-[15px] font-light">Missing records, scattered facts, slow summaries, weak handoff, duplicate effort, and places where the file stops being reviewable.</p>
+                <div class="consult-grid">
+                  <div>
+                    <label class="form-label" for="consult-firm">Firm or Organization</label>
+                    <input class="form-input" id="consult-firm" name="firm" type="text" placeholder="Smith & Co. LLP">
+                  </div>
+                  <div>
+                    <label class="form-label" for="consult-area">Practice Area</label>
+                    <select class="form-select" id="consult-area" name="practice_area" required>
+                      <option value="">Select one</option>
+                      <option>Plaintiff litigation</option>
+                      <option>Defense litigation</option>
+                      <option>Transactional / contracts</option>
+                      <option>Legal ops / intake</option>
+                      <option>Solo / small firm</option>
+                      <option>Individual legal intake</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
                 </div>
-                <div class="rounded-xl border border-white/8 bg-white/5 px-5 py-4">
-                  <p class="text-white text-sm font-semibold">3. We return next-step recommendations</p>
-                  <p class="text-white/35 mt-1 text-[15px] font-light">What to standardize, what to automate, what to keep human-reviewed, and what the first practical build should be.</p>
+                <div>
+                  <label class="form-label" for="consult-workflow">Workflow to Review</label>
+                  <input class="form-input" id="consult-workflow" name="workflow" type="text" placeholder="Client intake, chronology prep, contract review, matter summaries..." required>
                 </div>
-              </div>
-              <a href="mailto:hello@stalefish.ai?subject=Book%20a%20Stalefish%20Workflow%20Review&body=Firm%20or%20organization%3A%0AMatter%20type%3A%0ACurrent%20workflow%3A%0AMain%20bottleneck%3A%0AReview%20or%20confidentiality%20requirements%3A%0A" class="btn-glow w-full justify-center !py-4 mt-8">Open Workflow Review Request</a>
+                <div>
+                  <label class="form-label" for="consult-details">What is breaking right now?</label>
+                  <textarea class="form-textarea" id="consult-details" name="details" placeholder="Describe the bottleneck, where facts are getting lost, and what your team wants to improve." required></textarea>
+                </div>
+                <button type="submit" class="btn-glow w-full justify-center !py-4">Request Consultation</button>
+                <p class="form-meta">Submitting this form sends your request to `hello@stalefish.ai`. If this is the first FormSubmit submission for that inbox, the mailbox owner will need to confirm the service once.</p>
+              </form>
             </div>
           </div>
         </div>
@@ -795,8 +894,8 @@
       if(!container) return;
 
       const scene=new THREE.Scene();
-      const camera=new THREE.PerspectiveCamera(75,container.clientWidth/container.clientHeight,0.1,1000);
-      camera.position.z=5;
+      const camera=new THREE.PerspectiveCamera(68,container.clientWidth/container.clientHeight,0.1,1000);
+      camera.position.z=4.25;
 
       const renderer=new THREE.WebGLRenderer({alpha:true,antialias:true});
       renderer.setSize(container.clientWidth,container.clientHeight);
@@ -815,8 +914,8 @@
       heroEl.addEventListener('mouseleave',()=>{mouse.tx=0;mouse.ty=0;});
 
       // === Particle sphere geometry ===
-      const count=1200;
-      const radius=1.8;
+      const count=1800;
+      const radius=2.65;
       const positions=new Float32Array(count*3);
       const basePositions=new Float32Array(count*3);
       const sizes=new Float32Array(count);
@@ -840,7 +939,7 @@
         basePositions[i*3+1]=y;
         basePositions[i*3+2]=z;
 
-        sizes[i]=Math.random()*3+1.5;
+        sizes[i]=Math.random()*4+2.2;
         phases[i]=Math.random()*Math.PI*2;
 
         // Coinbase blue color with subtle variation
@@ -912,7 +1011,9 @@
       // === Raycaster for mouse interaction ===
       const raycaster=new THREE.Raycaster();
       const mouseVec=new THREE.Vector2();
-      const interactionSphere=new THREE.Sphere(new THREE.Vector3(0,0,0),radius+0.5);
+      const interactionPlane=new THREE.Plane(new THREE.Vector3(0,0,1),0);
+      const localMousePoint=new THREE.Vector3();
+      const invRotationMatrix=new THREE.Matrix4();
 
       let time=0;
       function animate(){
@@ -934,9 +1035,12 @@
         // Mouse-driven displacement
         mouseVec.set(mouse.x,mouse.y);
         raycaster.setFromCamera(mouseVec,camera);
-        const ray=raycaster.ray;
         const mouseWorld=new THREE.Vector3();
-        ray.at(5,mouseWorld);
+        const hitPlane=raycaster.ray.intersectPlane(interactionPlane,mouseWorld);
+        if(hitPlane){
+          invRotationMatrix.copy(particles.matrixWorld).invert();
+          localMousePoint.copy(mouseWorld).applyMatrix4(invRotationMatrix);
+        }
 
         const posArr=geo.attributes.position.array;
         for(let i=0;i<count;i++){
@@ -947,23 +1051,20 @@
           let by=basePositions[i3+1]*(1+breath);
           let bz=basePositions[i3+2]*(1+breath);
 
-          // Apply world rotation to get screen-space position for distance calc
-          const v=new THREE.Vector3(bx,by,bz);
-          v.applyEuler(particles.rotation);
-
-          // Mouse repulsion in world space
-          const dx=v.x-mouseWorld.x;
-          const dy=v.y-mouseWorld.y;
-          const dz=v.z-mouseWorld.z;
-          const dist=Math.sqrt(dx*dx+dy*dy+dz*dz);
-          if(dist<1.8&&(mouse.tx!==0||mouse.ty!==0)){
-            const force=(1-dist/1.8)*0.35;
-            const nx=dx/dist,ny=dy/dist,nz=dz/dist;
-            // We need to un-rotate the displacement back to local space
-            const disp=new THREE.Vector3(nx*force,ny*force,nz*force);
-            const invEuler=new THREE.Euler(-particles.rotation.x,-particles.rotation.y,-particles.rotation.z,'ZYX');
-            disp.applyEuler(invEuler);
-            bx+=disp.x;by+=disp.y;bz+=disp.z;
+          if(hitPlane && (mouse.tx!==0||mouse.ty!==0)){
+            const dx=bx-localMousePoint.x;
+            const dy=by-localMousePoint.y;
+            const dz=bz-localMousePoint.z;
+            const dist=Math.sqrt(dx*dx+dy*dy+dz*dz);
+            if(dist<1.35){
+              const force=(1-dist/1.35)*0.5;
+              const nx=dx/(dist||1);
+              const ny=dy/(dist||1);
+              const nz=dz/(dist||1);
+              bx+=nx*force;
+              by+=ny*force;
+              bz+=nz*force;
+            }
           }
 
           posArr[i3]=bx;
@@ -975,15 +1076,16 @@
         // Update connection lines near mouse
         let lineIdx=0;
         const hasMouse=mouse.tx!==0||mouse.ty!==0;
-        if(hasMouse){
+        if(hasMouse && hitPlane){
           // Find particles near mouse in world space and connect them
           const nearIdx=[];
           for(let i=0;i<count;i++){
             const i3=i*3;
-            const v2=new THREE.Vector3(posArr[i3],posArr[i3+1],posArr[i3+2]);
-            v2.applyEuler(particles.rotation);
-            const dm=v2.distanceTo(mouseWorld);
-            if(dm<2.0) nearIdx.push(i);
+            const dx=posArr[i3]-localMousePoint.x;
+            const dy=posArr[i3+1]-localMousePoint.y;
+            const dz=posArr[i3+2]-localMousePoint.z;
+            const dm=Math.sqrt(dx*dx+dy*dy+dz*dz);
+            if(dm<1.65) nearIdx.push(i);
           }
           for(let a=0;a<nearIdx.length&&lineIdx<maxLines;a++){
             const ia=nearIdx[a]*3;
@@ -1047,9 +1149,9 @@
       if(!probText) return;
 
       const sentences=[
-        {text:'Scattered facts break legal workflows.', type:'normal'},
-        {text:'Generic AI does not fix intake.', type:'gradient'},
-        {text:'Stalefish makes the record reviewable.', type:'gradient'}
+        {text:'The firms adopting legal AI now will widen the gap.', type:'normal'},
+        {text:'If your intake still lives in inboxes and PDFs, your practice is already losing time.', type:'dim'},
+        {text:'Do not let your practice get left behind.', type:'gradient'}
       ];
 
       // Build word spans
@@ -1102,10 +1204,10 @@
       // GSAP pin — locks section in place while scroll drives the reveal
       ScrollTrigger.create({
         trigger:'#probPin',
-        start:'top top',
-        end:'+=95%',
+        start:'top 18%',
+        end:'+=72%',
         pin:true,
-        scrub:0.28,
+        scrub:0.22,
         onEnter:()=>{
           if(autoRevealPlayed) return;
           autoRevealPlayed = true;
@@ -1121,7 +1223,7 @@
         },
         onUpdate:self=>{
           const p=self.progress;
-          const revealP=Math.min(p/0.98,1);
+          const revealP=Math.min(p/0.92,1);
           renderProblemWords(revealP);
         }
       });
