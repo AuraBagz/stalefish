@@ -279,6 +279,116 @@
       margin-top: auto;
       padding-top: 2rem;
     }
+    .service-card {
+      position: relative;
+      padding: 2rem;
+      border-radius: 1.75rem;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.84), rgba(255,255,255,0.72)),
+        rgba(255,255,255,0.78);
+      border: 1px solid rgba(255,255,255,0.92);
+      box-shadow: 0 20px 60px rgba(12,22,52,0.06), inset 0 1px 0 rgba(255,255,255,0.92);
+      min-height: 100%;
+    }
+    .service-card::before {
+      content:'';
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at top right, rgba(77,138,255,0.1), rgba(77,138,255,0) 28%),
+        linear-gradient(180deg, rgba(0,82,255,0.02), transparent 35%);
+      pointer-events:none;
+    }
+    .service-card-inner {
+      position:relative;
+      z-index:1;
+      height:100%;
+      display:flex;
+      flex-direction:column;
+    }
+    .service-card-head {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      margin-bottom:1.5rem;
+    }
+    .service-chip {
+      display:inline-flex;
+      align-items:center;
+      padding:0.55rem 0.95rem;
+      border-radius:999px;
+      background:#eef3ff;
+      border:1px solid rgba(0,82,255,0.08);
+      color:#0043cc;
+      font-size:0.76rem;
+      font-weight:700;
+      letter-spacing:0.12em;
+      text-transform:uppercase;
+      white-space:nowrap;
+    }
+    .service-chip.dark {
+      background:#17181d;
+      color:white;
+      border-color:rgba(23,24,29,0.7);
+    }
+    .service-icon {
+      width:3.4rem;
+      height:3.4rem;
+      border-radius:1.15rem;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#edf2ff;
+      border:1px solid rgba(0,82,255,0.08);
+      color:#0052ff;
+      flex-shrink:0;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.95);
+    }
+    .service-title {
+      max-width: 12ch;
+      font-size: clamp(2rem, 2.8vw, 2.55rem);
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      font-weight: 800;
+      color:#1d1d1f;
+    }
+    .service-copy {
+      margin-top: 1.15rem;
+      color:#6f7076;
+      line-height:1.7;
+      font-size:1.02rem;
+      font-weight:300;
+      max-width:32ch;
+    }
+    .service-points {
+      display:grid;
+      gap:0.8rem;
+      margin-top:1.6rem;
+    }
+    .service-point {
+      display:grid;
+      grid-template-columns: auto 1fr;
+      gap:0.75rem;
+      align-items:start;
+      color:#2d2f35;
+      font-size:0.96rem;
+      line-height:1.55;
+    }
+    .service-point svg {
+      margin-top:0.2rem;
+      flex-shrink:0;
+    }
+    .service-card .card-cta {
+      padding-top:1.7rem;
+      font-size:0.96rem;
+    }
+    @media (min-width: 768px) {
+      .service-card {
+        padding: 2.2rem;
+      }
+    }
     .process-shell {
       display: grid;
       grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
@@ -916,33 +1026,40 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
-          <div class="glass-light p-8 md:p-10 srv-card stack-card">
-            <div class="w-12 h-12 rounded-2xl bg-[#EBF0FF] flex items-center justify-center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg></div>
-            <span class="inline-block bg-[#EBF0FF] text-[#0043CC] text-sm font-semibold px-4 py-1.5 rounded-full mt-5">For Law Firms</span>
-            <h3 class="text-2xl font-bold text-[#1D1D1F] mt-5">Matter Intake, Review, and Drafting Systems</h3>
-            <p class="text-[#86868B] mt-4 leading-relaxed font-light">We help firms structure the work before the lawyer edits the output: intake packets, evidence collection, chronology, issue spotting, document triage, and attorney-ready draft support.</p>
-            <ul class="mt-7 space-y-3">
-              <li class="flex items-start gap-3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2.5" stroke-linecap="round" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg><span class="text-[#1D1D1F] text-[15px]">New-client intake and qualification flows</span></li>
-              <li class="flex items-start gap-3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2.5" stroke-linecap="round" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg><span class="text-[#1D1D1F] text-[15px]">Chronology, summary, and issue-list generation</span></li>
-              <li class="flex items-start gap-3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2.5" stroke-linecap="round" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg><span class="text-[#1D1D1F] text-[15px]">Contract, pleading, and packet preparation support</span></li>
-              <li class="flex items-start gap-3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2.5" stroke-linecap="round" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg><span class="text-[#1D1D1F] text-[15px]">Human review checkpoints and confidentiality guardrails</span></li>
-            </ul>
-            <a href="#contact" class="card-cta inline-flex items-center gap-2 text-[#0052FF] font-semibold hover:gap-3 transition-all text-[15px] scroll-link">Book Firm Workflow Review <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          <div class="service-card srv-card stack-card">
+            <div class="service-card-inner">
+              <div class="service-card-head">
+                <span class="service-chip">For Law Firms</span>
+                <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg></div>
+              </div>
+              <h3 class="service-title">Matter Intake, Review, and Drafting Systems</h3>
+              <p class="service-copy">We help firms structure the work before the lawyer edits the output: intake packets, evidence collection, chronology, issue spotting, document triage, and attorney-ready draft support.</p>
+              <div class="service-points">
+                <div class="service-point"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg><span>New-client intake and qualification flows</span></div>
+                <div class="service-point"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg><span>Chronology, summary, and issue-list generation</span></div>
+                <div class="service-point"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg><span>Contract, pleading, and packet preparation support</span></div>
+                <div class="service-point"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg><span>Human review checkpoints and confidentiality guardrails</span></div>
+              </div>
+              <a href="#contact" class="card-cta inline-flex items-center gap-2 text-[#0052FF] font-semibold hover:gap-3 transition-all scroll-link">Book Firm Workflow Review <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+            </div>
           </div>
 
-          <div class="glass-light p-8 md:p-10 srv-card stack-card">
-            <div class="inline-flex self-start bg-[#1D1D1F] text-white text-[11px] font-semibold px-4 py-1.5 rounded-full tracking-wider uppercase mb-5">For Individuals</div>
-            <div class="w-12 h-12 rounded-2xl bg-[#EBF0FF] flex items-center justify-center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></div>
-            <span class="inline-block bg-[#EBF0FF] text-[#0043CC] text-sm font-semibold px-4 py-1.5 rounded-full mt-5">Client-Facing</span>
-            <h3 class="text-2xl font-bold text-[#1D1D1F] mt-5">Legal Intake and Evidence Collection for People Who Need Help</h3>
-            <p class="text-[#86868B] mt-4 leading-relaxed font-light">We also design client-side workflows that help individuals submit cleaner information to counsel: timelines, documents, incident summaries, status updates, and guided intake before the legal team reviews the matter.</p>
-            <ul class="mt-7 space-y-3">
-              <li class="flex items-start gap-3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2.5" stroke-linecap="round" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg><span class="text-[#1D1D1F] text-[15px]">Guided intake and document upload flows</span></li>
-              <li class="flex items-start gap-3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2.5" stroke-linecap="round" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg><span class="text-[#1D1D1F] text-[15px]">Structured facts, dates, and event timelines</span></li>
-              <li class="flex items-start gap-3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2.5" stroke-linecap="round" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg><span class="text-[#1D1D1F] text-[15px]">Attorney-ready summaries instead of messy inbox threads</span></li>
-              <li class="flex items-start gap-3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2.5" stroke-linecap="round" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg><span class="text-[#1D1D1F] text-[15px]">Clear disclaimers and human handoff to legal professionals</span></li>
-            </ul>
-            <a href="#contact" class="card-cta inline-flex items-center gap-2 text-[#0052FF] font-semibold hover:gap-3 transition-all text-[15px] scroll-link">Book Intake Workflow Review <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          <div class="service-card srv-card stack-card">
+            <div class="service-card-inner">
+              <div class="service-card-head">
+                <span class="service-chip dark">For Individuals</span>
+                <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></div>
+              </div>
+              <h3 class="service-title">Legal Intake and Evidence Collection for People Who Need Help</h3>
+              <p class="service-copy">We design client-side workflows that help individuals submit cleaner information to counsel: timelines, documents, incident summaries, status updates, and guided intake before the legal team reviews the matter.</p>
+              <div class="service-points">
+                <div class="service-point"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg><span>Guided intake and document upload flows</span></div>
+                <div class="service-point"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg><span>Structured facts, dates, and event timelines</span></div>
+                <div class="service-point"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg><span>Attorney-ready summaries instead of messy inbox threads</span></div>
+                <div class="service-point"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg><span>Clear disclaimers and human handoff to legal professionals</span></div>
+              </div>
+              <a href="#contact" class="card-cta inline-flex items-center gap-2 text-[#0052FF] font-semibold hover:gap-3 transition-all scroll-link">Book Intake Workflow Review <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+            </div>
           </div>
         </div>
       </div>
