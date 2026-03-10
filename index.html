@@ -222,45 +222,71 @@
       margin-top: auto;
       padding-top: 2rem;
     }
+    .feature-grid {
+      align-items: stretch;
+      grid-auto-rows: 1fr;
+    }
     .feature-tile {
+      --fx: 50%;
+      --fy: 50%;
+      --rx: 0deg;
+      --ry: 0deg;
+      --lift: 0px;
       position: relative;
       height: 100%;
-      padding: 1.75rem;
+      padding: 1.85rem;
       border-radius: 1.5rem;
       overflow: hidden;
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03)),
-        rgba(255,255,255,0.02);
+        linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.025)),
+        rgba(255,255,255,0.018);
       border: 1px solid rgba(255,255,255,0.08);
-      transition: transform 0.45s cubic-bezier(0.4,0,0.2,1), border-color 0.45s cubic-bezier(0.4,0,0.2,1), box-shadow 0.45s cubic-bezier(0.4,0,0.2,1), background 0.45s cubic-bezier(0.4,0,0.2,1);
+      transition: border-color 0.35s cubic-bezier(0.4,0,0.2,1), box-shadow 0.35s cubic-bezier(0.4,0,0.2,1), background 0.35s cubic-bezier(0.4,0,0.2,1);
       display: flex;
       flex-direction: column;
-      min-height: 18rem;
+      min-height: 19.75rem;
+      transform-style: preserve-3d;
+      will-change: transform;
+      transform: perspective(1600px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(var(--lift));
     }
     .feature-tile::before {
       content: '';
       position: absolute;
-      inset: -25% auto auto -10%;
-      width: 10rem;
-      height: 10rem;
+      inset: auto;
+      left: calc(var(--fx) - 7rem);
+      top: calc(var(--fy) - 7rem);
+      width: 14rem;
+      height: 14rem;
       border-radius: 999px;
-      background: radial-gradient(circle, rgba(77,138,255,0.25), rgba(77,138,255,0));
+      background: radial-gradient(circle, rgba(125,166,255,0.18), rgba(125,166,255,0.04) 36%, rgba(125,166,255,0) 72%);
+      opacity: 0.85;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+    .feature-tile::after {
+      content: '';
+      position: absolute;
+      inset: 1px;
+      border-radius: inherit;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.12), transparent 28%, transparent 72%, rgba(125,166,255,0.12)),
+        radial-gradient(circle at var(--fx) var(--fy), rgba(255,255,255,0.14), rgba(255,255,255,0) 32%);
       opacity: 0;
-      transition: opacity 0.45s ease, transform 0.45s ease;
-      transform: translate3d(0, 1rem, 0);
+      transition: opacity 0.35s ease;
       pointer-events: none;
     }
-    .feature-tile:hover {
-      transform: translateY(-8px);
+    .feature-tile:hover,
+    .feature-tile.is-tilting {
       border-color: rgba(77,138,255,0.28);
       box-shadow: 0 24px 80px rgba(0, 30, 90, 0.22);
       background:
         linear-gradient(180deg, rgba(255,255,255,0.1), rgba(255,255,255,0.04)),
         rgba(255,255,255,0.03);
     }
-    .feature-tile:hover::before {
+    .feature-tile:hover::after,
+    .feature-tile.is-tilting::after {
       opacity: 1;
-      transform: translate3d(0, 0, 0);
     }
     .feature-head {
       display: flex;
@@ -268,6 +294,7 @@
       justify-content: space-between;
       gap: 1rem;
       margin-bottom: 1.25rem;
+      transform: translateZ(24px);
     }
     .feature-tag {
       display: inline-flex;
@@ -294,17 +321,22 @@
       color: #7da6ff;
       transition: transform 0.45s cubic-bezier(0.4,0,0.2,1), background 0.45s ease, border-color 0.45s ease;
       flex-shrink: 0;
+      transform: translateZ(36px);
     }
     .feature-tile:hover .feature-icon {
-      transform: translateY(-2px) rotate(-6deg);
+      transform: translateZ(44px) translateY(-2px) rotate(-6deg);
       background: rgba(77,138,255,0.12);
       border-color: rgba(77,138,255,0.28);
+    }
+    .feature-title {
+      transform: translateZ(34px);
     }
     .feature-body {
       color: rgba(255,255,255,0.38);
       line-height: 1.65;
       font-size: 0.95rem;
       font-weight: 300;
+      transform: translateZ(22px);
     }
     .feature-foot {
       margin-top: auto;
@@ -317,6 +349,7 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       font-weight: 600;
+      transform: translateZ(28px);
     }
     .feature-arrow {
       font-size: 1rem;
@@ -572,13 +605,13 @@
           <p class="text-[#0052FF] text-sm font-semibold tracking-widest uppercase mb-3 ind-reveal">Who It's For</p>
           <h2 class="text-3xl md:text-4xl lg:text-[2.75rem] font-bold text-white tracking-tight ind-reveal">Tailored to <span class="tg">Legal Team Structure</span></h2>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="indGrid">
+        <div class="feature-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="indGrid">
           <article class="feature-tile ind-card">
             <div class="feature-head">
               <span class="feature-tag">Plaintiff-side</span>
               <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></div>
             </div>
-            <h3 class="text-xl font-bold text-white">Plaintiff Firms</h3>
+            <h3 class="feature-title text-xl font-bold text-white">Plaintiff Firms</h3>
             <p class="feature-body mt-3">Turn fragmented intake into a cleaner case record with incident facts, supporting documents, chronology, and prep packets that staff and attorneys can actually move on.</p>
             <div class="feature-foot"><span>Intake to prep</span><span class="feature-arrow">↗</span></div>
           </article>
@@ -587,7 +620,7 @@
               <span class="feature-tag">Litigation</span>
               <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg></div>
             </div>
-            <h3 class="text-xl font-bold text-white">Defense and Litigation Teams</h3>
+            <h3 class="feature-title text-xl font-bold text-white">Defense and Litigation Teams</h3>
             <p class="feature-body mt-3">Accelerate document triage, issue spotting, witness materials, and internal summaries without losing the review chain or the underlying source record.</p>
             <div class="feature-foot"><span>Reviewable file</span><span class="feature-arrow">↗</span></div>
           </article>
@@ -596,7 +629,7 @@
               <span class="feature-tag">Transactional</span>
               <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
             </div>
-            <h3 class="text-xl font-bold text-white">Transactional and Contract Work</h3>
+            <h3 class="feature-title text-xl font-bold text-white">Transactional and Contract Work</h3>
             <p class="feature-body mt-3">Support clause review, draft comparison, contract playbooks, and checklist generation so attorneys spend more time deciding and less time reorganizing the deal room.</p>
             <div class="feature-foot"><span>Draft to review</span><span class="feature-arrow">↗</span></div>
           </article>
@@ -605,7 +638,7 @@
               <span class="feature-tag">Small firm</span>
               <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></div>
             </div>
-            <h3 class="text-xl font-bold text-white">Solo and Small Firms</h3>
+            <h3 class="feature-title text-xl font-bold text-white">Solo and Small Firms</h3>
             <p class="feature-body mt-3">Create a tighter front office with better intake, faster summaries, and fewer hours lost reconstructing the matter from email threads, notes, and scattered uploads.</p>
             <div class="feature-foot"><span>Front-office flow</span><span class="feature-arrow">↗</span></div>
           </article>
@@ -614,7 +647,7 @@
               <span class="feature-tag">Operations</span>
               <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></div>
             </div>
-            <h3 class="text-xl font-bold text-white">Legal Ops and Intake Teams</h3>
+            <h3 class="feature-title text-xl font-bold text-white">Legal Ops and Intake Teams</h3>
             <p class="feature-body mt-3">Standardize forms, evidence collection, client communication, and handoffs so matters arrive better organized before the lawyer touches the file.</p>
             <div class="feature-foot"><span>Ops layer</span><span class="feature-arrow">↗</span></div>
           </article>
@@ -623,7 +656,7 @@
               <span class="feature-tag">Client-facing</span>
               <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/></svg></div>
             </div>
-            <h3 class="text-xl font-bold text-white">Individuals Navigating Legal Matters</h3>
+            <h3 class="feature-title text-xl font-bold text-white">Individuals Navigating Legal Matters</h3>
             <p class="feature-body mt-3">Guide people through dates, documents, communications, and incident details in a way that helps counsel receive cleaner information sooner.</p>
             <div class="feature-foot"><span>Cleaner intake</span><span class="feature-arrow">↗</span></div>
           </article>
@@ -1117,6 +1150,40 @@
     // ===== INDUSTRIES =====
     gsap.utils.toArray('.ind-reveal').forEach(el=>{gsap.from(el,{y:30,opacity:0,duration:0.8,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 85%',once:true}});});
     ScrollTrigger.batch('.ind-card',{start:'top 88%',once:true,onEnter:batch=>gsap.from(batch,{y:40,opacity:0,duration:0.7,stagger:0.08,ease:'power3.out'})});
+    if(!RM){
+      document.querySelectorAll('.feature-tile').forEach(card=>{
+        let rafId=null;
+        const reset=()=>{
+          card.style.setProperty('--rx','0deg');
+          card.style.setProperty('--ry','0deg');
+          card.style.setProperty('--fx','50%');
+          card.style.setProperty('--fy','50%');
+          card.style.setProperty('--lift','0px');
+          card.classList.remove('is-tilting');
+        };
+        card.addEventListener('pointermove',e=>{
+          const rect=card.getBoundingClientRect();
+          const px=(e.clientX-rect.left)/rect.width;
+          const py=(e.clientY-rect.top)/rect.height;
+          const ry=((px-0.5)*14).toFixed(2);
+          const rx=((0.5-py)*12).toFixed(2);
+          if(rafId) cancelAnimationFrame(rafId);
+          rafId=requestAnimationFrame(()=>{
+            card.classList.add('is-tilting');
+            card.style.setProperty('--rx',`${rx}deg`);
+            card.style.setProperty('--ry',`${ry}deg`);
+            card.style.setProperty('--fx',`${(px*100).toFixed(2)}%`);
+            card.style.setProperty('--fy',`${(py*100).toFixed(2)}%`);
+            card.style.setProperty('--lift','-8px');
+          });
+        });
+        card.addEventListener('pointerleave',()=>{
+          if(rafId) cancelAnimationFrame(rafId);
+          reset();
+        });
+        card.addEventListener('pointercancel',reset);
+      });
+    }
 
     // ===== FAQ =====
     gsap.utils.toArray('.faq-reveal').forEach(el=>{gsap.from(el,{y:30,opacity:0,duration:0.8,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 85%',once:true}});});
