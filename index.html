@@ -1351,8 +1351,8 @@
       if(!container) return;
 
       const scene=new THREE.Scene();
-      const camera=new THREE.PerspectiveCamera(70,container.clientWidth/container.clientHeight,0.1,1000);
-      camera.position.z=4.65;
+      const camera=new THREE.PerspectiveCamera(58,container.clientWidth/container.clientHeight,0.1,1000);
+      camera.position.z=5.65;
 
       const renderer=new THREE.WebGLRenderer({alpha:true,antialias:true});
       renderer.setSize(container.clientWidth,container.clientHeight);
@@ -1360,59 +1360,74 @@
       renderer.setClearColor(0x000000,0);
       container.appendChild(renderer.domElement);
 
+      const orbGroup=new THREE.Group();
+      scene.add(orbGroup);
+
+      const ambient=new THREE.AmbientLight(0x4d8aff,0.38);
+      scene.add(ambient);
+      const keyLight=new THREE.PointLight(0x7da6ff,1.45,18,2);
+      keyLight.position.set(2.8,2.6,5.8);
+      scene.add(keyLight);
+      const rimLight=new THREE.PointLight(0x0052ff,0.95,18,2);
+      rimLight.position.set(-3.8,-2.4,4.2);
+      scene.add(rimLight);
+
       // Mouse tracking (normalized -1 to 1)
-      const mouse={x:0,y:0,tx:0,ty:0};
+      const mouse={x:0,y:0,tx:0,ty:0,active:false};
       const heroEl=document.getElementById('hero');
       heroEl.addEventListener('mousemove',e=>{
         const r=heroEl.getBoundingClientRect();
         mouse.tx=(e.clientX-r.left)/r.width*2-1;
         mouse.ty=-((e.clientY-r.top)/r.height*2-1);
+        mouse.active=true;
       });
-      heroEl.addEventListener('mouseleave',()=>{mouse.tx=0;mouse.ty=0;});
+      heroEl.addEventListener('mouseleave',()=>{mouse.tx=0;mouse.ty=0;mouse.active=false;});
 
-      // === Particle sphere geometry ===
-      const count=1550;
-      const radius=2.15;
-      const positions=new Float32Array(count*3);
-      const basePositions=new Float32Array(count*3);
-      const sizes=new Float32Array(count);
-      const colors=new Float32Array(count*3);
-      const phases=new Float32Array(count);
-
-      // Fibonacci sphere distribution for even spacing
+      // === Structured orb shell ===
+      const shellCount=2100;
+      const orbRadius=1.86;
+      const shellPositions=new Float32Array(shellCount*3);
+      const shellBasePositions=new Float32Array(shellCount*3);
+      const shellColors=new Float32Array(shellCount*3);
+      const shellBaseColors=new Float32Array(shellCount*3);
+      const shellSizes=new Float32Array(shellCount);
+      const shellBaseSizes=new Float32Array(shellCount);
+      const shellPhases=new Float32Array(shellCount);
       const goldenRatio=(1+Math.sqrt(5))/2;
-      for(let i=0;i<count;i++){
+      for(let i=0;i<shellCount;i++){
         const theta=2*Math.PI*i/goldenRatio;
-        const phi=Math.acos(1-2*(i+0.5)/count);
-        const r2=radius+Math.random()*0.15-0.075;
-        const x=r2*Math.sin(phi)*Math.cos(theta);
-        const y=r2*Math.sin(phi)*Math.sin(theta);
-        const z=r2*Math.cos(phi);
+        const phi=Math.acos(1-2*(i+0.5)/shellCount);
+        const radiusJitter=orbRadius+(Math.random()*0.08-0.04);
+        const x=radiusJitter*Math.sin(phi)*Math.cos(theta);
+        const y=radiusJitter*Math.sin(phi)*Math.sin(theta);
+        const z=radiusJitter*Math.cos(phi);
 
-        positions[i*3]=x;
-        positions[i*3+1]=y;
-        positions[i*3+2]=z;
-        basePositions[i*3]=x;
-        basePositions[i*3+1]=y;
-        basePositions[i*3+2]=z;
+        shellPositions[i*3]=x;
+        shellPositions[i*3+1]=y;
+        shellPositions[i*3+2]=z;
+        shellBasePositions[i*3]=x;
+        shellBasePositions[i*3+1]=y;
+        shellBasePositions[i*3+2]=z;
 
-        sizes[i]=Math.random()*3.4+1.9;
-        phases[i]=Math.random()*Math.PI*2;
+        const hueShift=Math.random()*0.07;
+        shellColors[i*3]=0.06+hueShift*0.18;
+        shellColors[i*3+1]=0.34+hueShift*0.18;
+        shellColors[i*3+2]=0.95-hueShift*0.08;
+        shellBaseColors[i*3]=shellColors[i*3];
+        shellBaseColors[i*3+1]=shellColors[i*3+1];
+        shellBaseColors[i*3+2]=shellColors[i*3+2];
 
-        // Coinbase blue color with subtle variation
-        const hueShift=Math.random()*0.1;
-        colors[i*3]=0.0+hueShift*0.15;     // R
-        colors[i*3+1]=0.32+hueShift*0.15;  // G
-        colors[i*3+2]=1.0-hueShift*0.1;    // B
+        shellSizes[i]=Math.random()*2.25+1.35;
+        shellBaseSizes[i]=shellSizes[i];
+        shellPhases[i]=Math.random()*Math.PI*2;
       }
 
-      const geo=new THREE.BufferGeometry();
-      geo.setAttribute('position',new THREE.BufferAttribute(positions,3));
-      geo.setAttribute('size',new THREE.BufferAttribute(sizes,1));
-      geo.setAttribute('color',new THREE.BufferAttribute(colors,3));
+      const shellGeo=new THREE.BufferGeometry();
+      shellGeo.setAttribute('position',new THREE.BufferAttribute(shellPositions,3));
+      shellGeo.setAttribute('size',new THREE.BufferAttribute(shellSizes,1));
+      shellGeo.setAttribute('color',new THREE.BufferAttribute(shellColors,3));
 
-      // Custom shader for glowing particles
-      const mat=new THREE.ShaderMaterial({
+      const shellMat=new THREE.ShaderMaterial({
         uniforms:{
           uTime:{value:0},
           uPixelRatio:{value:renderer.getPixelRatio()},
@@ -1428,8 +1443,8 @@
             vColor=color;
             vec4 mvPos=modelViewMatrix*vec4(position,1.0);
             float dist=length(mvPos.xyz);
-            vAlpha=smoothstep(8.0,2.0,dist)*0.7;
-            gl_PointSize=size*uPixelRatio*(4.0/(-mvPos.z));
+            vAlpha=smoothstep(8.8,2.1,dist)*0.78;
+            gl_PointSize=size*uPixelRatio*(5.4/(-mvPos.z));
             gl_Position=projectionMatrix*mvPos;
           }
         `,
@@ -1448,156 +1463,200 @@
         blending:THREE.AdditiveBlending,
       });
 
-      const particles=new THREE.Points(geo,mat);
-      scene.add(particles);
+      const shellPoints=new THREE.Points(shellGeo,shellMat);
+      orbGroup.add(shellPoints);
 
-      // Cursor glow sits on the same plane as the interaction point.
-      const glowCanvas=document.createElement('canvas');
-      glowCanvas.width=160;
-      glowCanvas.height=160;
-      const glowCtx=glowCanvas.getContext('2d');
-      const glowGrad=glowCtx.createRadialGradient(80,80,8,80,80,80);
-      glowGrad.addColorStop(0,'rgba(157,191,255,0.95)');
-      glowGrad.addColorStop(0.24,'rgba(77,138,255,0.55)');
-      glowGrad.addColorStop(0.56,'rgba(77,138,255,0.18)');
-      glowGrad.addColorStop(1,'rgba(77,138,255,0)');
-      glowCtx.fillStyle=glowGrad;
-      glowCtx.fillRect(0,0,160,160);
-      const glowTexture=new THREE.CanvasTexture(glowCanvas);
-      const cursorGlow=new THREE.Sprite(new THREE.SpriteMaterial({
-        map:glowTexture,
-        color:0x9dbfff,
+      // === Inner core ===
+      const coreCount=320;
+      const corePositions=new Float32Array(coreCount*3);
+      const coreColors=new Float32Array(coreCount*3);
+      const coreSizes=new Float32Array(coreCount);
+      const corePhases=new Float32Array(coreCount);
+      for(let i=0;i<coreCount;i++){
+        const r=Math.cbrt(Math.random())*(orbRadius*0.82);
+        const theta=Math.random()*Math.PI*2;
+        const phi=Math.acos(2*Math.random()-1);
+        const x=r*Math.sin(phi)*Math.cos(theta);
+        const y=r*Math.sin(phi)*Math.sin(theta);
+        const z=r*Math.cos(phi);
+        corePositions[i*3]=x;
+        corePositions[i*3+1]=y;
+        corePositions[i*3+2]=z;
+        coreColors[i*3]=0.18;
+        coreColors[i*3+1]=0.5;
+        coreColors[i*3+2]=1.0;
+        coreSizes[i]=Math.random()*2.8+1.4;
+        corePhases[i]=Math.random()*Math.PI*2;
+      }
+      const coreGeo=new THREE.BufferGeometry();
+      coreGeo.setAttribute('position',new THREE.BufferAttribute(corePositions,3));
+      coreGeo.setAttribute('size',new THREE.BufferAttribute(coreSizes,1));
+      coreGeo.setAttribute('color',new THREE.BufferAttribute(coreColors,3));
+      const coreMat=shellMat.clone();
+      coreMat.uniforms={
+        uTime:{value:0},
+        uPixelRatio:{value:renderer.getPixelRatio()},
+      };
+      const corePoints=new THREE.Points(coreGeo,coreMat);
+      orbGroup.add(corePoints);
+
+      // === Orbital rings ===
+      const rings=[];
+      const createRing=(scaleY, scaleZ, rotX, rotY, opacity)=>{
+        const points=[];
+        const segments=140;
+        for(let i=0;i<=segments;i++){
+          const a=(i/segments)*Math.PI*2;
+          points.push(new THREE.Vector3(Math.cos(a)*orbRadius*1.06, Math.sin(a)*orbRadius*scaleY, 0));
+        }
+        const geo=new THREE.BufferGeometry().setFromPoints(points);
+        const mat=new THREE.LineBasicMaterial({
+          color:0x4d8aff,
+          transparent:true,
+          opacity,
+          blending:THREE.AdditiveBlending,
+          depthWrite:false
+        });
+        const ring=new THREE.Line(geo,mat);
+        ring.rotation.x=rotX;
+        ring.rotation.y=rotY;
+        ring.scale.z=scaleZ;
+        orbGroup.add(ring);
+        rings.push(ring);
+      };
+      createRing(0.62,1,Math.PI*0.28,0.1,0.19);
+      createRing(0.9,1,Math.PI*0.68,Math.PI*0.35,0.12);
+      createRing(0.44,1,Math.PI*0.5,-Math.PI*0.28,0.16);
+
+      // === Structural filaments ===
+      const filamentSegments=[];
+      for(let i=0;i<140;i++){
+        const a=(Math.random()*shellCount)|0;
+        const b=(Math.random()*shellCount)|0;
+        const ax=shellBasePositions[a*3], ay=shellBasePositions[a*3+1], az=shellBasePositions[a*3+2];
+        const bx=shellBasePositions[b*3], by=shellBasePositions[b*3+1], bz=shellBasePositions[b*3+2];
+        const dx=ax-bx, dy=ay-by, dz=az-bz;
+        if(Math.sqrt(dx*dx+dy*dy+dz*dz) < orbRadius*1.15){
+          filamentSegments.push(ax,ay,az,bx,by,bz);
+        }
+      }
+      const filamentGeo=new THREE.BufferGeometry();
+      filamentGeo.setAttribute('position',new THREE.Float32BufferAttribute(filamentSegments,3));
+      const filamentMat=new THREE.LineBasicMaterial({
+        color:0x2e6fff,
         transparent:true,
-        opacity:0,
-        depthWrite:false,
-        blending:THREE.AdditiveBlending
-      }));
-      cursorGlow.scale.set(1.35,1.35,1);
-      cursorGlow.position.set(0,0,0.2);
-      scene.add(cursorGlow);
-
-      // === Mouse-proximity connection lines ===
-      const maxLines=800;
-      const linePositions=new Float32Array(maxLines*6);
-      const lineColors=new Float32Array(maxLines*6);
-      const lineGeo=new THREE.BufferGeometry();
-      lineGeo.setAttribute('position',new THREE.BufferAttribute(linePositions,3));
-      lineGeo.setAttribute('color',new THREE.BufferAttribute(lineColors,3));
-      const lineMat=new THREE.LineBasicMaterial({
-        vertexColors:true,transparent:true,opacity:0.4,
-        blending:THREE.AdditiveBlending,depthWrite:false
+        opacity:0.11,
+        blending:THREE.AdditiveBlending,
+        depthWrite:false
       });
-      const lines=new THREE.LineSegments(lineGeo,lineMat);
-      scene.add(lines);
+      const filaments=new THREE.LineSegments(filamentGeo,filamentMat);
+      orbGroup.add(filaments);
+
+      const coreLight=new THREE.PointLight(0x7da6ff,1.4,8,2);
+      coreLight.position.set(0,0,0.8);
+      orbGroup.add(coreLight);
+
+      const hoverTarget=new THREE.Mesh(
+        new THREE.SphereGeometry(orbRadius*1.015,48,48),
+        new THREE.MeshBasicMaterial({visible:false})
+      );
+      orbGroup.add(hoverTarget);
 
       // === Raycaster for mouse interaction ===
       const raycaster=new THREE.Raycaster();
       const mouseVec=new THREE.Vector2();
-      const interactionPlane=new THREE.Plane(new THREE.Vector3(0,0,1),0);
-      const localMousePoint=new THREE.Vector3();
-      const invRotationMatrix=new THREE.Matrix4();
+      const hoverPoint=new THREE.Vector3(0,0,orbRadius);
+      const hoverPointTarget=new THREE.Vector3(0,0,orbRadius);
+      const tempVec=new THREE.Vector3();
+      const tempNormal=new THREE.Vector3();
 
       let time=0;
       function animate(){
         requestAnimationFrame(animate);
-        time+=0.005;
+        time+=0.0055;
 
-        // Smooth mouse lerp
-        mouse.x+=(mouse.tx-mouse.x)*0.05;
-        mouse.y+=(mouse.ty-mouse.y)*0.05;
+        mouse.x+=(mouse.tx-mouse.x)*0.075;
+        mouse.y+=(mouse.ty-mouse.y)*0.075;
 
-        // Slow auto-rotation + mouse influence
-        particles.rotation.y=time*0.15+mouse.x*0.4;
-        particles.rotation.x=Math.sin(time*0.2)*0.1+mouse.y*0.3;
-        lines.rotation.y=particles.rotation.y;
-        lines.rotation.x=particles.rotation.x;
+        orbGroup.rotation.y=time*0.2+mouse.x*0.26;
+        orbGroup.rotation.x=Math.sin(time*0.35)*0.08+mouse.y*0.18;
+        rings.forEach((ring,i)=>{
+          ring.rotation.z+=0.0015+(i*0.00045);
+          ring.material.opacity=0.1+Math.sin(time*1.7+i)*0.015+(mouse.active?0.035:0);
+        });
+        filaments.rotation.y=-time*0.12;
+        filaments.rotation.x=time*0.06;
 
-        mat.uniforms.uTime.value=time;
+        shellMat.uniforms.uTime.value=time;
+        coreMat.uniforms.uTime.value=time*1.4;
 
-        // Mouse-driven displacement
         mouseVec.set(mouse.x,mouse.y);
         raycaster.setFromCamera(mouseVec,camera);
-        const mouseWorld=new THREE.Vector3();
-        const hitPlane=raycaster.ray.intersectPlane(interactionPlane,mouseWorld);
-        if(hitPlane){
-          invRotationMatrix.copy(particles.matrixWorld).invert();
-          localMousePoint.copy(mouseWorld).applyMatrix4(invRotationMatrix);
-        }
-
-        const posArr=geo.attributes.position.array;
-        for(let i=0;i<count;i++){
-          const i3=i*3;
-          // Base position with gentle breathing
-          const breath=Math.sin(time*2+phases[i])*0.03;
-          let bx=basePositions[i3]*(1+breath);
-          let by=basePositions[i3+1]*(1+breath);
-          let bz=basePositions[i3+2]*(1+breath);
-
-          if(hitPlane && (mouse.tx!==0||mouse.ty!==0)){
-            const dx=bx-localMousePoint.x;
-            const dy=by-localMousePoint.y;
-            const dz=bz-localMousePoint.z;
-            const dist=Math.sqrt(dx*dx+dy*dy+dz*dz);
-            if(dist<1.35){
-              const force=(1-dist/1.35)*0.5;
-              const nx=dx/(dist||1);
-              const ny=dy/(dist||1);
-              const nz=dz/(dist||1);
-              bx+=nx*force;
-              by+=ny*force;
-              bz+=nz*force;
-            }
-          }
-
-          posArr[i3]=bx;
-          posArr[i3+1]=by;
-          posArr[i3+2]=bz;
-        }
-        geo.attributes.position.needsUpdate=true;
-
-        // Update connection lines near mouse
-        let lineIdx=0;
-        const hasMouse=mouse.tx!==0||mouse.ty!==0;
-        if(hitPlane && hasMouse){
-          cursorGlow.position.copy(mouseWorld);
-          cursorGlow.position.z+=0.18;
-          cursorGlow.material.opacity+=(0.82-cursorGlow.material.opacity)*0.18;
+        const hit=mouse.active ? raycaster.intersectObject(hoverTarget,false)[0] : null;
+        if(hit){
+          hoverPointTarget.copy(hit.point);
+          orbGroup.worldToLocal(hoverPointTarget);
         } else {
-          cursorGlow.material.opacity+=(0-cursorGlow.material.opacity)*0.14;
+          hoverPointTarget.set(mouse.x*orbRadius*0.3, mouse.y*orbRadius*0.24, orbRadius*0.92);
         }
-        if(hasMouse && hitPlane){
-          // Find particles near mouse in world space and connect them
-          const nearIdx=[];
-          for(let i=0;i<count;i++){
-            const i3=i*3;
-            const dx=posArr[i3]-localMousePoint.x;
-            const dy=posArr[i3+1]-localMousePoint.y;
-            const dz=posArr[i3+2]-localMousePoint.z;
-            const dm=Math.sqrt(dx*dx+dy*dy+dz*dz);
-            if(dm<1.65) nearIdx.push(i);
-          }
-          for(let a=0;a<nearIdx.length&&lineIdx<maxLines;a++){
-            const ia=nearIdx[a]*3;
-            for(let b=a+1;b<nearIdx.length&&lineIdx<maxLines;b++){
-              const ib=nearIdx[b]*3;
-              const ddx=posArr[ia]-posArr[ib],ddy=posArr[ia+1]-posArr[ib+1],ddz=posArr[ia+2]-posArr[ib+2];
-              const dd=ddx*ddx+ddy*ddy+ddz*ddz;
-              if(dd<0.6){
-                const li=lineIdx*6;
-                const alpha=(1-Math.sqrt(dd)/0.77)*0.7;
-                linePositions[li]=posArr[ia];linePositions[li+1]=posArr[ia+1];linePositions[li+2]=posArr[ia+2];
-                linePositions[li+3]=posArr[ib];linePositions[li+4]=posArr[ib+1];linePositions[li+5]=posArr[ib+2];
-                lineColors[li]=0.0*alpha;lineColors[li+1]=0.32*alpha;lineColors[li+2]=1.0*alpha;
-                lineColors[li+3]=0.0*alpha;lineColors[li+4]=0.32*alpha;lineColors[li+5]=1.0*alpha;
-                lineIdx++;
-              }
-            }
-          }
+        hoverPoint.lerp(hoverPointTarget,0.18);
+
+        const shellPos=shellGeo.attributes.position.array;
+        const shellColor=shellGeo.attributes.color.array;
+        const shellSize=shellGeo.attributes.size.array;
+        for(let i=0;i<shellCount;i++){
+          const i3=i*3;
+          const breath=Math.sin(time*1.85+shellPhases[i])*0.024;
+          const bx=shellBasePositions[i3];
+          const by=shellBasePositions[i3+1];
+          const bz=shellBasePositions[i3+2];
+          tempVec.set(bx,by,bz);
+          tempNormal.copy(tempVec).normalize();
+
+          const hotspotDist=tempVec.distanceTo(hoverPoint);
+          const hotspot=Math.max(0,1-hotspotDist/0.58);
+          const ripple=Math.sin(time*11-hotspotDist*9.5)*0.5+0.5;
+          const lift=hotspot*(0.16+0.08*ripple);
+
+          shellPos[i3]=bx*(1+breath)+tempNormal.x*lift;
+          shellPos[i3+1]=by*(1+breath)+tempNormal.y*lift;
+          shellPos[i3+2]=bz*(1+breath)+tempNormal.z*lift;
+
+          const baseR=shellBaseColors[i3];
+          const baseG=shellBaseColors[i3+1];
+          const baseB=shellBaseColors[i3+2];
+          shellColor[i3]=baseR+(0.72-baseR)*hotspot;
+          shellColor[i3+1]=baseG+(0.83-baseG)*hotspot;
+          shellColor[i3+2]=baseB+(1.0-baseB)*hotspot;
+          shellSize[i]=shellBaseSizes[i]*(1+hotspot*2.2);
         }
-        for(let i=lineIdx*6;i<maxLines*6;i++) linePositions[i]=0;
-        lineGeo.attributes.position.needsUpdate=true;
-        lineGeo.attributes.color.needsUpdate=true;
-        lineGeo.setDrawRange(0,lineIdx*2);
+        shellGeo.attributes.position.needsUpdate=true;
+        shellGeo.attributes.color.needsUpdate=true;
+        shellGeo.attributes.size.needsUpdate=true;
+
+        const corePos=coreGeo.attributes.position.array;
+        const coreColor=coreGeo.attributes.color.array;
+        for(let i=0;i<coreCount;i++){
+          const i3=i*3;
+          const bx=corePositions[i3];
+          const by=corePositions[i3+1];
+          const bz=corePositions[i3+2];
+          const pulse=Math.sin(time*2.4+corePhases[i])*0.06;
+          corePos[i3]=bx*(1+pulse);
+          corePos[i3+1]=by*(1+pulse);
+          corePos[i3+2]=bz*(1+pulse);
+          const towardHotspot=Math.max(0,tempVec.set(bx,by,bz).normalize().dot(tempNormal.copy(hoverPoint).normalize()));
+          coreColor[i3]=0.16+towardHotspot*0.18;
+          coreColor[i3+1]=0.45+towardHotspot*0.2;
+          coreColor[i3+2]=0.92+towardHotspot*0.08;
+        }
+        coreGeo.attributes.position.needsUpdate=true;
+        coreGeo.attributes.color.needsUpdate=true;
+
+        coreLight.position.copy(hoverPoint).multiplyScalar(0.42);
+        coreLight.position.z+=0.85;
+        keyLight.position.x=2.8+mouse.x*0.9;
+        keyLight.position.y=2.6+mouse.y*0.8;
 
         renderer.render(scene,camera);
       }
@@ -1608,7 +1667,8 @@
         camera.aspect=container.clientWidth/container.clientHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(container.clientWidth,container.clientHeight);
-        mat.uniforms.uPixelRatio.value=renderer.getPixelRatio();
+        shellMat.uniforms.uPixelRatio.value=renderer.getPixelRatio();
+        coreMat.uniforms.uPixelRatio.value=renderer.getPixelRatio();
       });
     })();
 
