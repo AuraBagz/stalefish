@@ -54,3 +54,25 @@ body {
 ::selection {
   background: rgba(232, 67, 37, 0.15);
 }
+
+/* Accessibility: visible focus rings for keyboard navigation */
+:focus-visible {
+  outline: 2px solid #E84325;
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* Accessibility: respect reduced-motion OS preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Accessibility: skip link (revealed on focus) */
+.skip-link:focus {
+  top: 0 !important;
+}

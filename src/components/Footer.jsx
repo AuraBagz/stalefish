@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 export default function Footer() {
   return (
     <footer style={{ background: "#0d0d0d", padding: "72px 60px 44px" }}>
@@ -108,15 +110,17 @@ export default function Footer() {
           <p style={{ fontSize: 12, color: "rgba(255,255,255,0.18)" }}>
             © 2026 Stalefish. All rights reserved.
           </p>
-          <div style={{ display: "flex", gap: 28 }}>
-            {["Privacy", "Terms", "Security"].map(item => (
-              <a key={item} href="#" style={{
-                fontSize: 12, color: "rgba(255,255,255,0.18)", textDecoration: "none",
-              }}>
-                {item}
-              </a>
-            ))}
-          </div>
+          <nav aria-label="Legal links" style={{ display: "flex", gap: 28 }}>
+            <Link to="/privacy" style={{ fontSize: 12, color: "rgba(255,255,255,0.18)", textDecoration: "none" }}>
+              Privacy Policy
+            </Link>
+            <Link to="/terms" style={{ fontSize: 12, color: "rgba(255,255,255,0.18)", textDecoration: "none" }}>
+              Terms &amp; Disclaimer
+            </Link>
+            <Link to="/accessibility" style={{ fontSize: 12, color: "rgba(255,255,255,0.18)", textDecoration: "none" }}>
+              Accessibility
+            </Link>
+          </nav>
         </div>
       </div>
     </footer>
