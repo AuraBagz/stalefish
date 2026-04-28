@@ -216,7 +216,7 @@ function AIDemo() {
     const t2 = setTimeout(() => setPhase(2), 600 + s.clauses.length * 220 + 400)
     const t3 = setTimeout(() => {
       setScene(n => (n + 1) % SCENARIOS.length)
-    }, 600 + s.clauses.length * 220 + 400 + 3400)
+    }, 600 + s.clauses.length * 220 + 400 + 5000)
     return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3) }
   }, [scene])
 
