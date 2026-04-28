@@ -80,9 +80,9 @@ export default function Modules() {
       {CAPABILITIES.map((cap, i) => {
         const bg   = cap.dark ? "#111111" : "#ffffff"
         const text = cap.dark ? "#ffffff" : "#111111"
-        const sub  = cap.dark ? "rgba(255,255,255,0.45)" : "rgba(17,17,17,0.52)"
-        const num  = cap.dark ? "rgba(255,255,255,0.08)" : "rgba(17,17,17,0.08)"
-        const tag  = cap.dark ? "rgba(255,255,255,0.35)" : "rgba(17,17,17,0.38)"
+        const sub  = cap.dark ? "rgba(255,255,255,0.82)" : "rgba(17,17,17,0.52)"
+        const num  = cap.dark ? "rgba(255,255,255,0.12)" : "rgba(17,17,17,0.08)"
+        const tag  = cap.dark ? "rgba(255,255,255,0.72)" : "rgba(17,17,17,0.38)"
         const dot  = cap.dark ? "#E84325" : "#E84325"
         const div  = cap.dark ? "rgba(255,255,255,0.07)" : "rgba(17,17,17,0.08)"
         const cat  = "#E84325"
