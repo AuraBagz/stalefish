@@ -7,6 +7,7 @@ import Hero from './components/Hero'
 import Governance from './components/Governance'
 import Modules from './components/Modules'
 import Process from './components/Process'
+import Channels from './components/Channels'
 import Industries from './components/Industries'
 import FAQ from './components/FAQ'
 import CTA from './components/CTA'
@@ -20,7 +21,6 @@ import Accessibility from './pages/Accessibility'
 function HomePage() {
   return (
     <>
-      {/* Skip to main content — accessibility */}
       <a
         href="#main-content"
         style={{
@@ -40,9 +40,10 @@ function HomePage() {
       <Navbar />
       <main id="main-content" tabIndex={-1}>
         <Hero />
-        <Governance />
         <Modules />
         <Process />
+        <Channels />
+        <Governance />
         <Industries />
         <FAQ />
         <CTA />

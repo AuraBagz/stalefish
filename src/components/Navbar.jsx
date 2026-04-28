@@ -30,14 +30,20 @@ export default function Navbar() {
 
       {/* Nav links */}
       <div style={{ display: "flex", alignItems: "center", gap: 38 }}>
-        {["About us", "Capabilities", "Methodology", "Compliance", "Insights"].map(item => (
-          <a key={item} href={`#${item.toLowerCase().replace(" ", "-")}`} style={{
+        {[
+          { label: "Capabilities", href: "#capabilities" },
+          { label: "How It Works", href: "#process" },
+          { label: "Channels",     href: "#channels" },
+          { label: "Governance",   href: "#governance" },
+          { label: "FAQ",          href: "#faq" },
+        ].map(item => (
+          <a key={item.label} href={item.href} style={{
             fontSize: 14, fontWeight: 400, color: "#333",
             textDecoration: "none", letterSpacing: "-0.01em",
           }}
           onMouseEnter={e => e.target.style.color = "#111"}
           onMouseLeave={e => e.target.style.color = "#333"}>
-            {item}
+            {item.label}
           </a>
         ))}
       </div>

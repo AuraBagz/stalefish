@@ -3,27 +3,27 @@ import { motion } from "motion/react"
 const STEPS = [
   {
     num: "01",
-    label: "AUDIT",
-    title: "Map the friction in the file.",
-    desc: "We look at the real workflow first: where intake enters, where facts split apart, and where attorney time gets burned rebuilding the record.",
+    label: "DEPLOY",
+    title: "Live on day one.",
+    desc: "We identify one high-friction workflow — a recurring motion, a demand letter cycle, a contract review process — and deploy the system against it. The firm is shipping real, reviewed work product from the first session. Not waiting on a six-month build-out.",
   },
   {
     num: "02",
-    label: "DESIGN",
-    title: "Rebuild the flow around counsel.",
-    desc: "We define what AI organizes, what staff validates, and what remains attorney-reviewed so the system stays fast without becoming sloppy.",
+    label: "OPERATE",
+    title: "Deliverables ship continuously.",
+    desc: "The system runs the workflow. Motions get drafted. Citations get verified. Ethics gates run on every output. The attorney reviews and signs. We tighten the system on every pass — faster drafts, sharper research, cleaner ethics gate results.",
   },
   {
     num: "03",
-    label: "DEPLOY",
-    title: "Make the advantage compound.",
-    desc: "Launch one high-friction workflow first, tighten it, and expand from there so the team gets faster on every matter that follows.",
+    label: "COMPOUND",
+    title: "The firm wiki gets smarter.",
+    desc: "Every session adds to the firm's institutional memory — matter history, client entities, opposing parties, prior rulings, preferred clauses. The system that served one workflow serves ten. The advantage compounds the longer it runs.",
   },
 ]
 
 export default function Process() {
   return (
-    <section id="process" style={{ background: "#111111", padding: "120px 60px" }}>
+    <section id="process" aria-labelledby="process-heading" style={{ background: "#111111", padding: "120px 60px" }}>
       <div style={{ maxWidth: 1160, margin: "0 auto" }}>
 
         {/* Header */}
@@ -37,16 +37,16 @@ export default function Process() {
               fontSize: 11, fontWeight: 700, letterSpacing: "0.18em",
               textTransform: "uppercase", color: "#E84325", marginBottom: 18,
             }}>
-              Methodology
+              How It Works
             </p>
-            <h2 style={{
+            <h2 id="process-heading" style={{
               fontFamily: "'Barlow Condensed', sans-serif",
               fontSize: "clamp(42px, 5.5vw, 72px)",
               fontWeight: 900, lineHeight: 0.95,
               letterSpacing: "-0.01em", textTransform: "uppercase",
               color: "#ffffff",
             }}>
-              Messy Legal Work<br />Into a System
+              Deploy.<br />Operate.<br />Compound.
             </h2>
           </div>
           <a href="#contact" style={{
@@ -56,7 +56,7 @@ export default function Process() {
             fontSize: 14, fontWeight: 600, textDecoration: "none",
             letterSpacing: "-0.01em", whiteSpace: "nowrap",
           }}>
-            Start Implementation →
+            See it run on your workflow →
           </a>
         </div>
 
@@ -78,16 +78,14 @@ export default function Process() {
                 alignItems: "start",
               }}
             >
-              {/* Step number */}
               <span style={{
                 fontFamily: "'Barlow Condensed', sans-serif",
                 fontSize: 52, fontWeight: 900, lineHeight: 1,
-                color: "rgba(255,255,255,0.12)",
+                color: "rgba(255,255,255,0.10)",
               }}>
                 {s.num}
               </span>
 
-              {/* Label + title */}
               <div style={{ paddingTop: 8 }}>
                 <span style={{
                   fontSize: 9, fontWeight: 700, letterSpacing: "0.14em",
@@ -105,9 +103,8 @@ export default function Process() {
                 </h3>
               </div>
 
-              {/* Desc */}
               <p style={{
-                fontSize: 15, lineHeight: 1.7,
+                fontSize: 15, lineHeight: 1.75,
                 color: "rgba(255,255,255,0.45)", paddingTop: 8,
                 maxWidth: 480,
               }}>

@@ -3,30 +3,53 @@ import { motion } from "motion/react"
 const CAPABILITIES = [
   {
     num: "01",
-    category: "SYSTEMS",
-    title: "AI Architecture Integration",
-    desc: "We build the backbone of your firm's AI future. Private LLM deployment, secure document environments, and data sovereignty—engineered to respect client privilege at every layer.",
-    tags: ["Private Cloud & On-Prem LLM", "Document Management System (DMS) Connectors"],
+    category: "DRAFTING",
+    title: "Motions, Briefs & Correspondence",
+    desc: "Motions, briefs, demand letters, contracts, engagement letters, and client correspondence — drafted to the document type's exact formatting spec. Court pleadings get line numbers and proper caption formatting. Letters come out in the firm's letter style. Not a markdown dump converted to Word. File-format-level output, every time.",
+    tags: [
+      "Court Pleadings with Line Numbers & Caption Formatting",
+      "Demand Letters, Contracts & Engagement Agreements",
+      "Client Correspondence in Firm House Style",
+    ],
   },
   {
     num: "02",
-    category: "EDUCATION",
-    title: "Associate Partner Upskilling",
-    desc: "Bespoke AI training programs for legal professionals. From prompt engineering for partners to LLM governance for general counsel—we build fluency that sticks.",
-    tags: ["Custom Curriculum Design", "Firm-wide Rollout Planning"],
+    category: "RESEARCH",
+    title: "Citation-Disciplined Research",
+    desc: "Every citation must trace to a source actually read in the same session. SOURCE GAP flags surface anything unverifiable before the deliverable leaves the firm. Verbatim-quote checks run against the source document. The system is structurally incapable of shipping a case citation it cannot verify.",
+    tags: [
+      "In-Session Source Verification on Every Cite",
+      "SOURCE GAP Flagging Before Delivery",
+      "Verbatim Quote Validation Against Source",
+    ],
   },
   {
     num: "03",
-    category: "GOVERNANCE",
-    title: "Risk Mitigation & Compliance",
-    desc: "Governance frameworks for AI-generated filings, client communications, and research outputs. Every workflow includes human review checkpoints and privilege preservation by design.",
-    tags: ["AI Compliance Audits", "Attorney-Client Privilege Guardrails"],
+    category: "ETHICS GATE",
+    title: "RPC Compliance Review",
+    desc: "Every deliverable routes through a mandatory rules-of-professional-conduct compliance check before it is released. Mechanical fixes applied inline. Substantive judgment calls escalated to the attorney with a clear flag. Every artifact carries a CLEARED / CLEARED WITH FLAGS / NOT CLEARED status. Nothing leaves the firm without the supervising attorney's sign-off.",
+    tags: [
+      "CLEARED / CLEARED WITH FLAGS / NOT CLEARED on Every Output",
+      "RPC 5.3 Supervised AI — Mandatory Attorney Sign-Off",
+      "Inline Mechanical Fixes + Escalation for Judgment Calls",
+    ],
+  },
+  {
+    num: "04",
+    category: "CONTINUITY",
+    title: "Persistent Memory & Firm Wiki",
+    desc: "The system accumulates a structured firm wiki across every session — client matters, cross-referenced entities, opposing parties, prior rulings, preferred clauses. Calendar awareness with deadline warnings. Every action logged. The longer the system runs, the more valuable your firm's institutional memory becomes.",
+    tags: [
+      "Cross-Session Persistent Memory",
+      "Structured Firm Wiki — Matters, Clients, Entities",
+      "Deadline Awareness & Log-Everything Discipline",
+    ],
   },
 ]
 
 export default function Modules() {
   return (
-    <section id="capabilities" style={{ background: "#ffffff", padding: "120px 60px" }}>
+    <section id="capabilities" aria-labelledby="capabilities-heading" style={{ background: "#ffffff", padding: "120px 60px" }}>
       <div style={{ maxWidth: 1160, margin: "0 auto" }}>
 
         {/* Header */}
@@ -35,16 +58,16 @@ export default function Modules() {
             fontSize: 11, fontWeight: 700, letterSpacing: "0.18em",
             textTransform: "uppercase", color: "#E84325", marginBottom: 18,
           }}>
-            Service Offerings
+            What the System Does
           </p>
-          <h2 style={{
+          <h2 id="capabilities-heading" style={{
             fontFamily: "'Barlow Condensed', sans-serif",
             fontSize: "clamp(42px, 5.5vw, 72px)",
             fontWeight: 900, lineHeight: 0.95,
             letterSpacing: "-0.01em", textTransform: "uppercase",
             color: "#111",
           }}>
-            Core Capabilities<br />For Global Firms
+            Four Things.<br />All of Them Well.
           </h2>
         </div>
 
@@ -71,7 +94,7 @@ export default function Modules() {
                 <span style={{
                   fontFamily: "'Barlow Condensed', sans-serif",
                   fontSize: 48, fontWeight: 900, lineHeight: 1,
-                  color: "rgba(17,17,17,0.12)", display: "block",
+                  color: "rgba(17,17,17,0.10)", display: "block",
                 }}>
                   {cap.num}
                 </span>
@@ -85,7 +108,7 @@ export default function Modules() {
 
               {/* Title */}
               <h3 style={{
-                fontSize: "clamp(22px, 2.2vw, 30px)",
+                fontSize: "clamp(20px, 2vw, 28px)",
                 fontWeight: 700, letterSpacing: "-0.02em",
                 color: "#111", lineHeight: 1.15, paddingTop: 6,
               }}>
@@ -95,20 +118,20 @@ export default function Modules() {
               {/* Desc + tags */}
               <div style={{ paddingTop: 6 }}>
                 <p style={{
-                  fontSize: 15, lineHeight: 1.7,
-                  color: "rgba(17,17,17,0.52)", marginBottom: 20,
+                  fontSize: 15, lineHeight: 1.72,
+                  color: "rgba(17,17,17,0.52)", marginBottom: 22,
                 }}>
                   {cap.desc}
                 </p>
-                <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                   {cap.tags.map(tag => (
-                    <div key={tag} style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                      <span style={{
+                    <div key={tag} style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
+                      <span aria-hidden="true" style={{
                         width: 5, height: 5, borderRadius: "50%",
-                        background: "#E84325", flexShrink: 0,
+                        background: "#E84325", flexShrink: 0, marginTop: 6,
                       }} />
                       <span style={{
-                        fontSize: 12, color: "rgba(17,17,17,0.45)", fontWeight: 500,
+                        fontSize: 12.5, color: "rgba(17,17,17,0.45)", fontWeight: 500, lineHeight: 1.5,
                       }}>
                         {tag}
                       </span>
@@ -118,8 +141,6 @@ export default function Modules() {
               </div>
             </motion.div>
           ))}
-
-          {/* Bottom border */}
           <div style={{ borderTop: "1px solid rgba(17,17,17,0.08)" }} />
         </div>
       </div>
