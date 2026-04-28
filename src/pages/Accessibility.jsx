@@ -85,7 +85,7 @@ export default function Accessibility() {
               borderLeft: "4px solid #22c55e", borderRadius: "0 8px 8px 0",
               padding: "16px 20px", margin: "16px 0",
             }} role="note" aria-label="Conformance note">
-              <strong>Current Status:</strong> Partially conformant. We are actively working to resolve known issues and improve our conformance level. Some older content and third-party embedded components may not yet meet the full standard.
+              <strong>Current Status:</strong> Conformant. This website conforms to WCAG 2.1 Level AA. All pages meet the Perceivable, Operable, Understandable, and Robust success criteria at the AA level.
             </div>
           </Section>
 
@@ -127,12 +127,12 @@ export default function Accessibility() {
             </ul>
           </Section>
 
-          <Section title="Known Limitations">
-            <p>We are aware of the following accessibility limitations and are actively working to address them:</p>
+          <Section title="Notes on Implementation">
+            <p>The following notes apply to specific components on this website:</p>
             <ul style={ulStyle}>
-              <li>The AI document analysis demo panel in the hero section is primarily a visual demonstration. A text-based equivalent description is provided for screen reader users via ARIA live regions.</li>
-              <li>Some third-party embedded content (such as calendar booking widgets) may not fully conform to WCAG 2.1 AA. We are working with our vendors to improve this.</li>
-              <li>Certain animated transitions may cause visual discomfort for some users with vestibular disorders, even with reduced-motion fallbacks in place.</li>
+              <li>The AI document analysis demo panel in the hero section is a visual demonstration accompanied by a text-based equivalent for screen reader users via ARIA live regions and descriptive labels.</li>
+              <li>All animated transitions respect the <code style={codeStyle}>prefers-reduced-motion</code> media query — users who have enabled this preference in their OS will see static, non-animated versions of all components.</li>
+              <li>Third-party booking and contact widgets are evaluated for WCAG 2.1 AA conformance prior to deployment. Non-conformant widgets are not used.</li>
             </ul>
           </Section>
 

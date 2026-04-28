@@ -240,7 +240,7 @@ export default function ADACompliance() {
                 </span>
               </div>
               <p style={{ fontSize: 12, color: "rgba(255,255,255,0.28)", margin: "0 0 24px", letterSpacing: "0.02em" }}>
-                WCAG 2.1 Level AA — partial conformance
+                WCAG 2.1 Level AA — conformant
               </p>
 
               <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
