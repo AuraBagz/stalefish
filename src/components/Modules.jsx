@@ -11,6 +11,7 @@ const CAPABILITIES = [
       "Demand Letters, Contracts & Engagement Agreements",
       "Client Correspondence in Firm House Style",
     ],
+    dark: true,
   },
   {
     num: "02",
@@ -22,6 +23,7 @@ const CAPABILITIES = [
       "SOURCE GAP Flagging Before Delivery",
       "Verbatim Quote Validation Against Source",
     ],
+    dark: false,
   },
   {
     num: "03",
@@ -33,6 +35,7 @@ const CAPABILITIES = [
       "RPC 5.3 Supervised AI — Mandatory Attorney Sign-Off",
       "Inline Mechanical Fixes + Escalation for Judgment Calls",
     ],
+    dark: true,
   },
   {
     num: "04",
@@ -44,16 +47,17 @@ const CAPABILITIES = [
       "Structured Firm Wiki — Matters, Clients, Entities",
       "Deadline Awareness & Log-Everything Discipline",
     ],
+    dark: false,
   },
 ]
 
 export default function Modules() {
   return (
-    <section id="capabilities" aria-labelledby="capabilities-heading" style={{ background: "#ffffff", padding: "120px 60px" }}>
-      <div style={{ maxWidth: 1160, margin: "0 auto" }}>
+    <section id="capabilities" aria-labelledby="capabilities-heading">
 
-        {/* Header */}
-        <div style={{ marginBottom: 80 }}>
+      {/* Section header — light */}
+      <div style={{ background: "#ffffff", padding: "120px 60px 80px" }}>
+        <div style={{ maxWidth: 1160, margin: "0 auto" }}>
           <p style={{
             fontSize: 11, fontWeight: 700, letterSpacing: "0.18em",
             textTransform: "uppercase", color: "#E84325", marginBottom: 18,
@@ -65,85 +69,102 @@ export default function Modules() {
             fontSize: "clamp(42px, 5.5vw, 72px)",
             fontWeight: 900, lineHeight: 0.95,
             letterSpacing: "-0.01em", textTransform: "uppercase",
-            color: "#111",
+            color: "#111", margin: 0,
           }}>
-            Four Things.<br />All of Them Well.
+            The Complete<br />Legal Operations Stack.
           </h2>
         </div>
-
-        {/* Capabilities list */}
-        <div>
-          {CAPABILITIES.map((cap, i) => (
-            <motion.div
-              key={cap.num}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.55, delay: i * 0.08 }}
-              style={{
-                display: "grid",
-                gridTemplateColumns: "80px 1fr 1fr",
-                gap: "0 56px",
-                padding: "48px 0",
-                borderTop: "1px solid rgba(17,17,17,0.08)",
-                alignItems: "start",
-              }}
-            >
-              {/* Number + category */}
-              <div>
-                <span style={{
-                  fontFamily: "'Barlow Condensed', sans-serif",
-                  fontSize: 48, fontWeight: 900, lineHeight: 1,
-                  color: "rgba(17,17,17,0.10)", display: "block",
-                }}>
-                  {cap.num}
-                </span>
-                <span style={{
-                  fontSize: 9, fontWeight: 700, letterSpacing: "0.14em",
-                  textTransform: "uppercase", color: "#E84325", display: "block", marginTop: 4,
-                }}>
-                  {cap.category}
-                </span>
-              </div>
-
-              {/* Title */}
-              <h3 style={{
-                fontSize: "clamp(20px, 2vw, 28px)",
-                fontWeight: 700, letterSpacing: "-0.02em",
-                color: "#111", lineHeight: 1.15, paddingTop: 6,
-              }}>
-                {cap.title}
-              </h3>
-
-              {/* Desc + tags */}
-              <div style={{ paddingTop: 6 }}>
-                <p style={{
-                  fontSize: 15, lineHeight: 1.72,
-                  color: "rgba(17,17,17,0.52)", marginBottom: 22,
-                }}>
-                  {cap.desc}
-                </p>
-                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                  {cap.tags.map(tag => (
-                    <div key={tag} style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
-                      <span aria-hidden="true" style={{
-                        width: 5, height: 5, borderRadius: "50%",
-                        background: "#E84325", flexShrink: 0, marginTop: 6,
-                      }} />
-                      <span style={{
-                        fontSize: 12.5, color: "rgba(17,17,17,0.45)", fontWeight: 500, lineHeight: 1.5,
-                      }}>
-                        {tag}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          ))}
-          <div style={{ borderTop: "1px solid rgba(17,17,17,0.08)" }} />
-        </div>
       </div>
+
+      {/* Alternating capability stripes */}
+      {CAPABILITIES.map((cap, i) => {
+        const bg   = cap.dark ? "#111111" : "#ffffff"
+        const text = cap.dark ? "#ffffff" : "#111111"
+        const sub  = cap.dark ? "rgba(255,255,255,0.45)" : "rgba(17,17,17,0.52)"
+        const num  = cap.dark ? "rgba(255,255,255,0.08)" : "rgba(17,17,17,0.08)"
+        const tag  = cap.dark ? "rgba(255,255,255,0.35)" : "rgba(17,17,17,0.38)"
+        const dot  = cap.dark ? "#E84325" : "#E84325"
+        const div  = cap.dark ? "rgba(255,255,255,0.07)" : "rgba(17,17,17,0.08)"
+        const cat  = "#E84325"
+
+        return (
+          <div key={cap.num} style={{ background: bg }}>
+            <div style={{ maxWidth: 1160, margin: "0 auto", padding: "0 60px" }}>
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "80px 1fr 1fr",
+                  gap: "0 56px",
+                  padding: "56px 0",
+                  borderTop: `1px solid ${div}`,
+                  alignItems: "start",
+                }}
+              >
+                {/* Number + category */}
+                <div>
+                  <span style={{
+                    fontFamily: "'Barlow Condensed', sans-serif",
+                    fontSize: 52, fontWeight: 900, lineHeight: 1,
+                    color: num, display: "block",
+                  }}>
+                    {cap.num}
+                  </span>
+                  <span style={{
+                    fontSize: 9, fontWeight: 700, letterSpacing: "0.14em",
+                    textTransform: "uppercase", color: cat, display: "block", marginTop: 6,
+                  }}>
+                    {cap.category}
+                  </span>
+                </div>
+
+                {/* Title */}
+                <h3 style={{
+                  fontSize: "clamp(20px, 2vw, 28px)",
+                  fontWeight: 700, letterSpacing: "-0.02em",
+                  color: text, lineHeight: 1.15, paddingTop: 6,
+                  margin: 0,
+                }}>
+                  {cap.title}
+                </h3>
+
+                {/* Desc + tags */}
+                <div style={{ paddingTop: 6 }}>
+                  <p style={{
+                    fontSize: 15, lineHeight: 1.75,
+                    color: sub, marginBottom: 22, margin: "0 0 22px",
+                  }}>
+                    {cap.desc}
+                  </p>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                    {cap.tags.map(t => (
+                      <div key={t} style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
+                        <span aria-hidden="true" style={{
+                          width: 5, height: 5, borderRadius: "50%",
+                          background: dot, flexShrink: 0, marginTop: 7,
+                        }} />
+                        <span style={{
+                          fontSize: 12.5, color: tag, fontWeight: 500, lineHeight: 1.5,
+                        }}>
+                          {t}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Bottom border on last row only if light */}
+              {i === CAPABILITIES.length - 1 && (
+                <div style={{ borderTop: `1px solid ${div}` }} />
+              )}
+            </div>
+          </div>
+        )
+      })}
     </section>
   )
 }
