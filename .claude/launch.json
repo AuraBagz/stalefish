@@ -1,0 +1,13 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "stalefish-v2",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["vite", "--port", "5189", "--strictPort"],
+      "port": 5189,
+      "autoPort": false,
+      "cwd": "C:/Users/fatty/Desktop/stalefish/stalefish-v2"
+    }
+  ]
+}
