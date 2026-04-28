@@ -8,6 +8,7 @@ import Governance from './components/Governance'
 import Modules from './components/Modules'
 import Process from './components/Process'
 import Channels from './components/Channels'
+import ADACompliance from './components/ADACompliance'
 import Industries from './components/Industries'
 import FAQ from './components/FAQ'
 import CTA from './components/CTA'
@@ -44,6 +45,7 @@ function HomePage() {
         <Process />
         <Channels />
         <Governance />
+        <ADACompliance />
         <Industries />
         <FAQ />
         <CTA />
