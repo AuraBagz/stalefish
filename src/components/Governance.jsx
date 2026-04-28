@@ -281,7 +281,7 @@ export default function Governance() {
           {RPC_TICKER.map((rule, i) => (
             <span key={i} style={{
               fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.14em",
-              textTransform: "uppercase", color: "rgba(255,255,255,0.18)",
+              textTransform: "uppercase", color: "rgba(255,255,255,0.6)",
               padding: "0 2.5rem",
               borderRight: "1px solid rgba(255,255,255,0.07)",
             }}>
